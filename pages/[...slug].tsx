@@ -5,6 +5,7 @@ import { DrupalNode } from "next-drupal"
 import { drupal } from "lib/drupal"
 import { NodeArticle } from "components/node--article"
 import { NodeBasicPage } from "components/node--basic-page"
+import { NodeProduct } from "components/products/node--product"
 import { Layout } from "components/layout"
 
 const RESOURCE_TYPES = ["node--page", "node--article"]
@@ -24,6 +25,7 @@ export default function NodePage({ resource }: NodePageProps) {
       </Head>
       {resource.type === "node--page" && <NodeBasicPage node={resource} />}
       {resource.type === "node--article" && <NodeArticle node={resource} />}
+      {resource.type === "node--product" && <NodeProduct node={resource} />}
     </Layout>
   )
 }
@@ -52,6 +54,11 @@ export async function getStaticProps(
   if (type === "node--article") {
     params = {
       include: "field_image,uid",
+    }
+  }
+  if (type === "node--product") {
+    params = {
+      include: "field_product_image,uid,field_product_brand,field_product_category",
     }
   }
 

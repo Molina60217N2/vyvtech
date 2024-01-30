@@ -1,10 +1,14 @@
 import Link from "next/link"
 
 import { PreviewAlert } from "components/preview-alert"
+import {NextUIProvider} from "@nextui-org/react";
+
+
+
 
 export function Layout({ children }) {
   return (
-    <>
+    <NextUIProvider>
       <PreviewAlert />
       <div className="max-w-screen-md px-6 mx-auto">
         <header>
@@ -24,6 +28,6 @@ export function Layout({ children }) {
         </header>
         <main className="container py-10 mx-auto">{children}</main>
       </div>
-    </>
+    </NextUIProvider>
   )
 }

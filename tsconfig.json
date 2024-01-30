@@ -16,6 +16,6 @@
     "baseUrl": "./",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/products/featured--products.jsx"],
   "exclude": ["node_modules"]
 }
