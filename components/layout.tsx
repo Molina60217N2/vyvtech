@@ -2,10 +2,14 @@ import Link from "next/link"
 import Footer from "../components/Footer"
 
 import { PreviewAlert } from "components/preview-alert"
+import {NextUIProvider} from "@nextui-org/react";
+
+
+
 
 export function Layout({ children }) {
   return (
-    <>
+    <NextUIProvider>
       <PreviewAlert />
       <div className="">
         <header>
@@ -26,6 +30,6 @@ export function Layout({ children }) {
         <main className="container py-10 mx-auto">{children}</main>
         <Footer/>
       </div>
-    </>
+    </NextUIProvider>
   )
 }
