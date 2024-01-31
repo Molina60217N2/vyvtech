@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Footer from "../components/Footer"
 import { PreviewAlert } from "components/preview-alert"
 import {NextUIProvider} from "@nextui-org/react";
 import { Cabin } from 'next/font/google'
@@ -12,11 +13,12 @@ export function Layout({ children }) {
   return (
     <NextUIProvider className={cabin.className}>
       <PreviewAlert />
-      <div>
+      <div className="flex flex-col min-h-screen">
         <header>
           <Navbarvyv/>
         </header>
-        <main className="container py-10 mx-auto">{children}</main>
+        <main className="container flex-1 py-10 mx-auto">{children}</main>
+        <Footer/>
       </div>
     </NextUIProvider>
   )
