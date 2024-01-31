@@ -2,12 +2,12 @@ import Head from "next/head";
 import { GetStaticPropsResult } from "next";
 import { DrupalNode } from "next-drupal";
 
-import { drupal } from "lib/drupal";
-import { Layout } from "components/layout";
-import { NodeArticleTeaser } from "components/node--article--teaser";
-import { NodeProductTeaser } from "components/products/node--product--teaser";
-import FeaturedProducts from "components/products/featured--products";
-
+import { drupal } from "lib/drupal"
+import { Layout } from "components/layout"
+import { NodeArticleTeaser } from "components/node--article--teaser"
+import { NodeProductTeaser } from "components/products/node--product--teaser"
+import FeaturedProducts from "components/products/featured--products"
+import Services from '@/components/homepage/Services'
 interface IndexPageProps {
   featured: DrupalNode[];
 }
@@ -22,7 +22,11 @@ export default function IndexPage({ featured }: IndexPageProps) {
           content="A Next.js site powered by a Drupal backend."
         />
       </Head>
-      <FeaturedProducts products={featured} />
+      <Services/>
+      <div>
+        <FeaturedProducts
+        products = {featured}/>
+      </div>
     </Layout>
   );
 }
