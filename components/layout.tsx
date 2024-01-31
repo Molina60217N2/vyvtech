@@ -1,3 +1,8 @@
+import Link from "next/link";
+import Footer from "../components/Footer";
+
+import { PreviewAlert } from "components/preview-alert";
+import { NextUIProvider } from "@nextui-org/react";
 import Link from "next/link"
 import Footer from "../components/Footer"
 import { PreviewAlert } from "components/preview-alert"
@@ -17,9 +22,9 @@ export function Layout({ children }) {
         <header>
           <Navbarvyv/>
         </header>
-        <main className="flex-1 py-10">{children}</main>
-        <Footer/>
+        <main className="">{children}</main>
+        <Footer />
       </div>
     </NextUIProvider>
-  )
+  );
 }
