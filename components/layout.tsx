@@ -11,7 +11,7 @@ export function Layout({ children }) {
   return (
     <NextUIProvider>
       <PreviewAlert />
-      <div className="">
+      <div className="flex flex-col min-h-screen">
         <header>
           <div className="container flex items-center justify-between py-6 mx-auto">
             <Link href="/" className="text-2xl font-semibold no-underline">
@@ -27,7 +27,7 @@ export function Layout({ children }) {
             </Link>
           </div>
         </header>
-        <main className="container py-10 mx-auto">{children}</main>
+        <main className="container flex-1 py-10 mx-auto">{children}</main>
         <Footer/>
       </div>
     </NextUIProvider>
