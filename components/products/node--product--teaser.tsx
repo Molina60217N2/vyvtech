@@ -1,36 +1,58 @@
-import Image from "next/image"
-import Link from "next/link"
-import { DrupalNode } from "next-drupal"
+import Image from "next/image";
+import Link from "next/link";
+import { DrupalNode } from "next-drupal";
 
-
-import { absoluteUrl, formatDate } from "lib/utils"
-import { Card, CardBody, Button, CardHeader, CardFooter } from "@nextui-org/react"
+import { absoluteUrl, formatDate } from "lib/utils";
+import {
+  Card,
+  CardBody,
+  Button,
+  CardHeader,
+  CardFooter,
+} from "@nextui-org/react";
 
 interface NodeProductTeaserProps {
-  node: DrupalNode
+  node: DrupalNode;
 }
 
 export function NodeProductTeaser({ node, ...props }: NodeProductTeaserProps) {
- 
+  console.log(node.field_product_brand.name);
   return (
-    <div {...props}>
-      <Link href={node.path.alias}>
-        <div>
-          <div>
-            <Image
+    <div {...props} className="bg-EEF4F8">
+      {/* card */}
+      <div className="bg-white rounded-xl h-full p-4 lg:max-w-80">
+        <div className="max-h-28 sm:max-h-72 md:max-h-48 lg:max-h-72 overflow-hidden relative">
+          <Image
             src={absoluteUrl(node.field_product_image.uri.url)}
             alt={node.field_product_image.resourceIdObjMeta.alt}
-            width={390}
+            width={800}
             height={400}
-            />
-          </div>
-          </div>  
-        </Link>
- 
+            objectFit="cover"
+            className="rounded-t-md max-h-48 lg:max-h-96"
+          />
+        </div>
+        <div className="grid gap-3">
+          <p className="text-sm text-darkBlue font-bold md:text-lg">
+            {node.title}
+          </p>
+          <p className="text-sm md:text-base font-normal text-lightGray">
+            {node.field_product_brand.name}
+          </p>
+          <p className="text-sm text-darkBlue font-bold md:text-lg">
+            ¢{node.field_product_price}
+          </p>
+          <Link href={node.path.alias}>
+            <Button className="bg-darkBlue">
+              <span className="text-sm md:text-base text-white">
+                Ver producto
+              </span>
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
-
 
 // <Link href={node.path.alias} className="no-underline hover:text-blue-600">
 //         <h2 className="mb-4 text-4xl font-bold">{node.title}</h2>

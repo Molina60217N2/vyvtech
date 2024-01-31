@@ -1,11 +1,8 @@
-import Link from "next/link"
-import Footer from "../components/Footer"
+import Link from "next/link";
+import Footer from "../components/Footer";
 
-import { PreviewAlert } from "components/preview-alert"
-import {NextUIProvider} from "@nextui-org/react";
-
-
-
+import { PreviewAlert } from "components/preview-alert";
+import { NextUIProvider } from "@nextui-org/react";
 
 export function Layout({ children }) {
   return (
@@ -27,9 +24,9 @@ export function Layout({ children }) {
             </Link>
           </div>
         </header>
-        <main className="container flex-1 py-10 mx-auto">{children}</main>
-        <Footer/>
+        <main className="">{children}</main>
+        <Footer />
       </div>
     </NextUIProvider>
-  )
+  );
 }
