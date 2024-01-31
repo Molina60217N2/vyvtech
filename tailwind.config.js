@@ -9,7 +9,13 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        darkBlue: "#122049",
+        lightGray: "#737373",
+        featuredSection: "#EEF4F8"
+      }
+    },
   },
   variants: {
     extend: {},
