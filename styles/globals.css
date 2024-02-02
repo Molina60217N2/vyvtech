@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.rec-arrow {
+  background-color: #0f5c9a !important;
+  color: white !important;
+}
+.rec-arrow:disabled {
+  background-color: #5b93c1 !important;
+}
+
+.rec-arrow:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.rec-dot_active {
+  background-color: #0f5c9a !important;
+}
+
+body{
+    background: F9F9F9;
+}

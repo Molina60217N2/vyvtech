@@ -1,0 +1,30 @@
+.gradient {
+    background: radial-gradient(
+        18% 55% at 10% 80%, rgba(15, 50, 154, 0.3) 0%, rgba(18, 32, 73, 0) 100%),
+      radial-gradient(
+        20% 60% at 95% 25%, rgba(15, 50, 154, 0.3) 0%, rgba(18, 32, 73, 0) 100%);
+  }
+  @media (max-width: 1440px) {
+    .gradient {
+        background: radial-gradient(
+            18% 60% at 0% 90%, rgba(15, 50, 154, 0.3) 0%, rgba(18, 32, 73, 0) 100%),
+          radial-gradient(
+            20% 60% at 95% 25%, rgba(15, 50, 154, 0.3) 0%, rgba(18, 32, 73, 0) 100%);
+      }
+  }
+  @media (max-width: 1280px) {
+    .gradient {
+        background: radial-gradient(
+            18% 60% at 0% 90%, rgba(15, 50, 154, 0.3) 0%, rgba(18, 32, 73, 0) 100%),
+          radial-gradient(
+            20% 60% at 98% 25%, rgba(15, 50, 154, 0.3) 0%, rgba(18, 32, 73, 0) 100%);
+      }
+  }
+  @media (max-width: 1024px) {
+    .gradient {
+        background: radial-gradient(
+            18% 55% at 10% 80%, rgba(15, 50, 154, 0) 0%, rgba(18, 32, 73, 0) 100%),
+          radial-gradient(
+            20% 60% at 95% 25%, rgba(15, 50, 154, 0) 0%, rgba(18, 32, 73, 0) 100%);
+      }
+  }
