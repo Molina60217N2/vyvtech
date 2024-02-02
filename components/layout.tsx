@@ -27,7 +27,7 @@ export function Layout({ children }) {
             </Link>
           </div>
         </header>
-        <main className="container flex-1 py-10 mx-auto">{children}</main>
+        <main className="flex-1 py-10">{children}</main>
         <Footer/>
       </div>
     </NextUIProvider>
