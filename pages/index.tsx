@@ -7,6 +7,7 @@ import { Layout } from "components/layout"
 import { NodeArticleTeaser } from "components/node--article--teaser"
 import { NodeProductTeaser } from "components/products/node--product--teaser"
 import FeaturedProducts from "components/products/featured--products"
+import Brands from "components/brands-static/brands"
 
 interface IndexPageProps {
   featured: DrupalNode[]
@@ -23,6 +24,9 @@ export default function IndexPage({ featured }: IndexPageProps) {
         />
       </Head>
       <div>
+        <Brands/>
+      </div>
+      <div>
         <FeaturedProducts
         products = {featured}/>
       </div>
@@ -34,8 +38,8 @@ export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<IndexPageProps>> {
   const featured = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--product", 
-    context, 
+    "node--product",
+    context,
     {
       params:{
         "filter[field_featured_product]":1, //1 es true XD
