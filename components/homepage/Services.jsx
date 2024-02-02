@@ -3,7 +3,7 @@ import styles from './services.module.css'
 export default function Services() {
   return (
     <div className={`flex justify-items-center flex-col ${styles.gradient}`}>
-      <div className='max-[768px]:w-80 max-[768px]:mx-auto'>
+      <div className='max-[768px]:w-80 max-[768px]:mx-auto mt-14'>
         <h2 className="text-center font-bold text-5xl max-[768px]:text-[24px] text-[#122049]">SERVICIOS QUE PROPORCIONAMOS</h2>
       </div>
       <div className="pt-24 grid grid-cols-[460px,460px] justify-center max-[768px]:flex max-[768px]:flex-col max-[768px]:pl-5 justify-items-center">

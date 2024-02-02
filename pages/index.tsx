@@ -23,10 +23,10 @@ export default function IndexPage({ featured }: IndexPageProps) {
           content="A Next.js site powered by a Drupal backend."
         />
       </Head>
-      <Services/>
       <div>
         <Brands/>
       </div>
+      <Services/>
       <div>
         <FeaturedProducts
         products = {featured}/>
