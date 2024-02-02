@@ -7,6 +7,7 @@ import { Layout } from "components/layout"
 import { NodeArticleTeaser } from "components/node--article--teaser"
 import { NodeProductTeaser } from "components/products/node--product--teaser"
 import FeaturedProducts from "components/products/featured--products"
+import Brands from "components/brands-static/brands"
 import Services from '@/components/homepage/Services'
 interface IndexPageProps {
   featured: DrupalNode[];
@@ -22,6 +23,9 @@ export default function IndexPage({ featured }: IndexPageProps) {
           content="A Next.js site powered by a Drupal backend."
         />
       </Head>
+      <div>
+        <Brands/>
+      </div>
       <Services/>
       <div>
         <FeaturedProducts
