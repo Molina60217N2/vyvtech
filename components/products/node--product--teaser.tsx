@@ -18,17 +18,17 @@ interface NodeProductTeaserProps {
 export function NodeProductTeaser({ node, ...props }: NodeProductTeaserProps) {
   console.log(node.field_product_brand.name);
   return (
-    <div {...props} className="bg-EEF4F8">
+    <div {...props} className="bg-EEF4F8 mt-4">
       {/* card */}
       <div className="bg-white rounded-xl h-full p-4 lg:max-w-80">
-        <div className="max-h-28 sm:max-h-72 md:max-h-48 lg:max-h-72 overflow-hidden relative">
+        <div className="sm:max-h-72 md:max-h-48 lg:max-h-72 overflow-hidden">
           <Image
             src={absoluteUrl(node.field_product_image.uri.url)}
             alt={node.field_product_image.resourceIdObjMeta.alt}
             width={800}
             height={400}
-            objectFit="cover"
-            className="rounded-t-md max-h-48 lg:max-h-96"
+            // objectFit="contain"
+            className="rounded-t-md"
           />
         </div>
         <div className="grid gap-3">
