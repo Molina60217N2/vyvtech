@@ -23,7 +23,7 @@ export default function IndexPage({ nodes }: ProductosPageProps) {
       <h1>Pagina de producots</h1>
       {nodes.map((product) => (
         <div key={product.id}>
-          <NodeProductTeaser node={product} />
+          <p>{product.title}</p>
         </div>
       ))}
     </Layout>
