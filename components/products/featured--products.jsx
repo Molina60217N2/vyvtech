@@ -6,7 +6,7 @@ import styles from "./featured--products.module.css";
 export default function FeaturedProducts({ products, ...props }) {
   const breakPoints = [
     { width: 550, itemsToShow: 1, itemsToScroll: 1, itemPadding: [0, 30] },
-    { width: 600, itemsToShow: 3, itemsToScroll: 2 },
+    { width: 600, itemsToShow: 3, itemsToScroll: 3 },
   ];
   return (
     <div className="p-5 h-max bg-featuredSection mb-4">

@@ -10,3 +10,6 @@ export function formatDate(input: string): string {
 export function absoluteUrl(input: string) {
   return `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}${input}`
 }
+export function isRelative(url: string) {
+  return !new RegExp("^(?:[a-z]+:)?//", "i").test(url)
+}
