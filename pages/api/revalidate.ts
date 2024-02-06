@@ -1,7 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { getStaticPaths } from "../productos/page/[page]"  
-import { revalidatePath } from 'next/cache'
-import glob from 'fast-glob'
 
 export default async function handler(
   request: NextApiRequest,
@@ -18,12 +15,6 @@ export default async function handler(
   // Validate slug.
   if (!slug) {
     return response.status(400).json({ message: "Invalid slug." })
-  }
-
-  if(slug === '/productos') {
-    const files = await glob(`../productos/*.html`);
-    const paths = files.map((file) => `/${file.replace('.html', '')}`);
-    await Promise.all(paths.map(path => response.revalidate(path)));
   }
 
   try {
