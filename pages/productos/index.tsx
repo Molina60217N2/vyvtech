@@ -19,7 +19,7 @@ interface ProductosPageProps {
   nodes: DrupalNode[];
   count: number;
 }
-const PRODUCTS_PER_PAGE = 12;
+const PRODUCTS_PER_PAGE = 24;
 export default function IndexPage({ nodes, count }: ProductosPageProps) {
   const router = useRouter();
   const params = useSearchParams();
