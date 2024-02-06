@@ -123,6 +123,5 @@ export async function getStaticProps(
         total: Math.ceil(result.meta.count / PRODUCTS_PER_PAGE),
       },
     },
-    revalidate: 5,
   };
 }
