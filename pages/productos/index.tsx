@@ -1,28 +1,43 @@
 import { getParams } from "@/lib/get-params";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { GetServerSidePropsResult } from "next";
 import { drupal } from "lib/drupal";
 import {
   DrupalNode,
   DrupalTaxonomyTerm,
   JsonApiResponse,
-  getResourceCollectionFromContext,
   deserialize,
 } from "next-drupal";
 import { Layout } from "@/components/layout";
 import { NodeProductTeaser } from "@/components/products/node--product--teaser";
-import { PagerProps, Pager } from "components/pager";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Button, Pagination } from "@nextui-org/react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 interface ProductosPageProps {
   nodes: DrupalNode[];
-  page: Pick<PagerProps, "current" | "total">;
-  //   categories: DrupalTaxonomyTerm[];
+  count: number;
 }
 const PRODUCTS_PER_PAGE = 12;
-export default function IndexPage({ nodes, page }: ProductosPageProps) {
+export default function IndexPage({ nodes, count }: ProductosPageProps) {
+  const router = useRouter();
+  const params = useSearchParams();
+  var current = 0;
+  if (params.get("page")) {
+    current = parseInt(params.get("page"));
+  }
+
+  const pages = [];
+  for (let i = 0; i < Math.ceil(count / PRODUCTS_PER_PAGE); i++) {
+    pages.push(i);
+  }
+
   return (
     <Layout>
       <div className="pt-7 pb-7 md:pt-14">
         <h1>Pagina de producots</h1>
+        <h1>{count}</h1>
         <div
           className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 min-[1550px]:grid-cols-4`}
         >
@@ -36,47 +51,35 @@ export default function IndexPage({ nodes, page }: ProductosPageProps) {
             <p className="py-4">No nodes found</p>
           )}
         </div>
-
-        <Pager
-          current={page.current}
-          total={page.total}
-          href={(page) =>
-            page === 0 ? `/productos` : `/productos/page/${page}`
-          }
+      </div>
+      {/*  Paginator */}
+      <div className="flex items-center justify-center mt-8 mb-8">
+        <Pagination
+          loop
+          showControls
+          classNames={{
+            cursor:
+              "bg-darkBlue shadow-lg from-default-500 to-default-800 dark:from-default-300 dark:to-default-100 text-white font-bold",
+          }}
+          total={pages.length}
+          initialPage={current + 1}
+          onChange={(page: number) => {
+            router.push("/productos?page=" + (page - 1).toString());
+          }}
         />
       </div>
     </Layout>
   );
 }
-export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
-  const params = new DrupalJsonApiParams()
-    .addFilter("status", "1")
-    .addPageLimit(1);
-  const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
-    "node--product",
-    context,
-    {
-      deserialize: false,
-      params: params.getQueryObject(),
-    }
-  );
-  const totalPages = Math.ceil(result.meta.count / PRODUCTS_PER_PAGE);
 
-  const paths = Array.from({ length: totalPages }, (_, page) => ({
-    params: {
-      page: `${page + 1}`,
-    },
-  }));
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
-
-export async function getStaticProps(
+export async function getServerSideProps(
   context
-): Promise<GetStaticPropsResult<ProductosPageProps>> {
-  const current = parseInt(context.params.page);
+): Promise<GetServerSidePropsResult<ProductosPageProps>> {
+  var current = 0;
+  if (context.query.page) {
+    current = parseInt(context.query.page);
+  }
+
   const params = new DrupalJsonApiParams()
     .addInclude(["uid", "field_product_image", "field_product_brand"])
     .addFields("node--product", [
@@ -114,14 +117,12 @@ export async function getStaticProps(
       notFound: true,
     };
   }
+  const count = result.meta.count;
   const nodes = deserialize(result) as DrupalNode[];
   return {
     props: {
       nodes,
-      page: {
-        current,
-        total: Math.ceil(result.meta.count / PRODUCTS_PER_PAGE),
-      },
+      count,
     },
   };
 }
