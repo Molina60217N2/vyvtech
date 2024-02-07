@@ -3,12 +3,24 @@ import { DrupalNode } from "next-drupal";
 import Link from "next/link";
 import { Button, Chip } from "@nextui-org/react";
 import { absoluteUrl, formatDate } from "lib/utils";
+import { NodeProductTeaser } from "./node--product--teaser";
+import Carousel from "@itseasy21/react-elastic-carousel";
+import styles from "./featured--products.module.css";
 
-interface NodeProductProps {
+export interface NodeProductProps {
   node: DrupalNode;
+  additionalContent:{
+    relatedProducts: DrupalNode[]
+  }
 }
 
-export function NodeProduct({ node, ...props }: NodeProductProps) {
+export function NodeProduct({ node, additionalContent, ...props }: NodeProductProps) {
+
+  const breakPoints = [
+    { width: 550, itemsToShow: 1, itemsToScroll: 1, itemPadding: [0, 30] },
+    { width: 600, itemsToShow: 3, itemsToScroll: 3 },
+  ];
+
   return (
     <article {...props}>
       <div className="grid grid-cols-2 justify-items-center max-[1024px]:flex max-[1024px]:flex-col pt-10">
@@ -63,9 +75,29 @@ export function NodeProduct({ node, ...props }: NodeProductProps) {
       {node.field_product_description?.processed && (
         <div
           dangerouslySetInnerHTML={{ __html: node.field_product_description?.processed }}
-          className="mt-6 w-[84%] mx-auto text-[18px] leading-loose "
+          className="mt-6 pb-10 w-[84%] mx-auto text-[18px] leading-loose "
         />
       )}
+      <div className="p-10 h-max bg-featuredSection">
+      <div className={`md:w-4/5 m-auto`}>
+        <h2
+          className={`text-darkBlue text-center text-2xl font-bold w-1/2 mx-auto mb-4 pb-2 md:text-start md:mx-10 md:w-auto md:inline-block lg:mx-32 lg:text-4xl  ${styles.section_title}`}
+        >
+          PRODUCTOS RELACIONADOS
+        </h2>
+        <Carousel itemsToShow={3} breakPoints={breakPoints}  isRTL={false}>
+        {additionalContent["relatedProducts"]?.length ? (
+              additionalContent["relatedProducts"].map((node) => (
+                <div key={node.id}>
+                  <NodeProductTeaser node={node} />
+                </div>
+              ))
+            ) : (
+              <p className="py-4">No nodes found</p>
+            )}
+        </Carousel>
+      </div>
+    </div>
     </article>
   );
 }
