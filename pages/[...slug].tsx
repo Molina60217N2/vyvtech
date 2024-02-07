@@ -5,7 +5,7 @@ import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 import { drupal } from "lib/drupal"
 import { NodeArticle } from "components/node--article"
 import { NodeBasicPage } from "components/node--basic-page"
-import { NodeProduct } from "components/products/node--product"
+import { NodeProduct, NodeProductProps } from "components/products/node--product"
 import { Layout } from "components/layout"
 import { TaxonomyProductCategoryProps, TaxonomyProductCategory } from "@/components/products/taxonomy_term--product_categories"
 import { PageProps } from "@/types"
@@ -35,7 +35,7 @@ export default function NodePage({ resource, additionalContent }: NodePageProps)
       </Head>
       {/* {resource.type === "node--page" && <NodeBasicPage node={resource} />}
       {resource.type === "node--article" && <NodeArticle node={resource} />} */}
-      {resource.type === "node--product" && <NodeProduct node={resource as DrupalNode}/>}
+      {resource.type === "node--product" && <NodeProduct node={resource as DrupalNode} additionalContent = {additionalContent as NodeProductProps["additionalContent"]} />}
       {resource.type === "taxonomy_term--product_categories" && <TaxonomyProductCategory term={resource as DrupalTaxonomyTerm} additionalContent={additionalContent as TaxonomyProductCategoryProps["additionalContent"]}/>}
     </Layout>
   )
@@ -126,12 +126,13 @@ if (resource.type === "node--product") {
       params: getParams("node--product")
       .addFilter("id", resource.id, "<>")
       .addFilter("field_product_category.id", resource.field_product_category.id)
-      .addPageLimit(3)
+      .addPageLimit(12)
       .getQueryObject(),
     }
   )),
  ]
 }
+
 
 
   return {
