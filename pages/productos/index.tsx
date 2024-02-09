@@ -12,9 +12,9 @@ import { Layout } from "@/components/layout";
 import { NodeProductTeaser } from "@/components/products/node--product--teaser";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button, Pagination } from "@nextui-org/react";
+import { Button, Card, Pagination, Skeleton } from "@nextui-org/react";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 interface ProductosPageProps {
   nodes: DrupalNode[];
   count: number;
@@ -32,42 +32,81 @@ export default function IndexPage({ nodes, count }: ProductosPageProps) {
   for (let i = 0; i < Math.ceil(count / PRODUCTS_PER_PAGE); i++) {
     pages.push(i);
   }
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+  const componentes = Array(12).fill(
+    <Card className="w-[200px] space-y-5 p-4" radius="lg">
+      <Skeleton className="rounded-lg">
+        <div className="h-24 rounded-lg bg-default-300"></div>
+      </Skeleton>
+      <div className="space-y-3">
+        <Skeleton className="w-3/5 rounded-lg">
+          <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
+        </Skeleton>
+        <Skeleton className="w-4/5 rounded-lg">
+          <div className="h-3 w-4/5 rounded-lg bg-default-200"></div>
+        </Skeleton>
+        <Skeleton className="w-2/5 rounded-lg">
+          <div className="h-3 w-2/5 rounded-lg bg-default-300"></div>
+        </Skeleton>
+      </div>
+    </Card>
+  );
   return (
     <Layout>
-      <div className="pt-7 pb-7 md:pt-14">
-        <h1>Pagina de producots</h1>
-        <h1>{count}</h1>
-        <div
-          className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 min-[1550px]:grid-cols-4`}
-        >
-          {nodes?.length ? (
-            nodes.map((node) => (
-              <div key={node.id}>
-                <NodeProductTeaser node={node} />
-              </div>
-            ))
-          ) : (
-            <p className="py-4">No nodes found</p>
-          )}
+      {isLoading ? (
+        // cargando
+        <div className="pt-7 pb-7 md:pt-14">
+          <div
+            className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 min-[1550px]:grid-cols-4`}
+          >
+            {componentes.map((componente, index) => (
+              <div key={index}>{componente}</div>
+            ))}
+          </div>
         </div>
-      </div>
-      {/*  Paginator */}
-      <div className="flex items-center justify-center mt-8 mb-8">
-        <Pagination
-          loop
-          showControls
-          classNames={{
-            cursor:
-              "bg-darkBlue shadow-lg from-default-500 to-default-800 dark:from-default-300 dark:to-default-100 text-white font-bold",
-          }}
-          total={pages.length}
-          initialPage={current + 1}
-          onChange={(page: number) => {
-            router.push("/productos?page=" + (page - 1).toString());
-          }}
-        />
-      </div>
+      ) : (
+        <div>
+          <div className="pt-7 pb-7 md:pt-14">
+            <h1>Pagina de producots</h1>
+            <h1>{count}</h1>
+            <div
+              className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 min-[1550px]:grid-cols-4`}
+            >
+              {nodes?.length ? (
+                nodes.map((node) => (
+                  <div key={node.id}>
+                    <NodeProductTeaser node={node} />
+                  </div>
+                ))
+              ) : (
+                <p className="py-4">No nodes found</p>
+              )}
+            </div>
+          </div>
+          {/*  Paginator */}
+          <div className="flex items-center justify-center mt-8 mb-8">
+            <Pagination
+              loop
+              showControls
+              classNames={{
+                cursor:
+                  "bg-darkBlue shadow-lg from-default-500 to-default-800 dark:from-default-300 dark:to-default-100 text-white font-bold",
+              }}
+              total={pages.length}
+              initialPage={current + 1}
+              onChange={(page: number) => {
+                router.push("/productos?page=" + (page - 1).toString());
+              }}
+            />
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }
