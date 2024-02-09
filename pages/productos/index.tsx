@@ -12,15 +12,30 @@ import { Layout } from "@/components/layout";
 import { NodeProductTeaser } from "@/components/products/node--product--teaser";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button, Card, Pagination, Skeleton } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Pagination,
+  Skeleton,
+} from "@nextui-org/react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import React from "react";
 interface ProductosPageProps {
   nodes: DrupalNode[];
+  brands: DrupalTaxonomyTerm[];
   count: number;
 }
 const PRODUCTS_PER_PAGE = 24;
-export default function IndexPage({ nodes, count }: ProductosPageProps) {
+export default function IndexPage({
+  nodes,
+  count,
+  brands,
+}: ProductosPageProps) {
   const router = useRouter();
   const params = useSearchParams();
   var current = 0;
@@ -39,6 +54,11 @@ export default function IndexPage({ nodes, count }: ProductosPageProps) {
       setIsLoading(false);
     }, 2000);
   }, []);
+  const [selectedKeys, setSelectedKeys] = React.useState(
+    new Set(["Categoria"])
+  );
+
+  const selectedValue = params.get("brand");
   const componentes = Array(12).fill(
     <Card className="w-[200px] space-y-5 p-4" radius="lg">
       <Skeleton className="rounded-lg">
@@ -72,6 +92,33 @@ export default function IndexPage({ nodes, count }: ProductosPageProps) {
         </div>
       ) : (
         <div>
+          <Dropdown>
+            <DropdownTrigger>
+              <Button variant="bordered" className="capitalize">
+                {selectedValue}
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label="Single selection example"
+              variant="flat"
+              disallowEmptySelection
+              selectionMode="single"
+              selectedKeys={selectedKeys}
+              onSelectionChange={setSelectedKeys}
+            >
+              {brands.map((brand) => (
+                <DropdownItem
+                  key={brand.name}
+                  onClick={() => {
+                    current = 0;
+                    router.push("/productos?page=0" + "&brand=" + brand.name);
+                  }}
+                >
+                  {brand.name}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
           <div className="pt-7 pb-7 md:pt-14">
             <h1>Pagina de producots</h1>
             <h1>{count}</h1>
@@ -93,7 +140,6 @@ export default function IndexPage({ nodes, count }: ProductosPageProps) {
           <div className="flex items-center justify-center mt-8 mb-8">
             <Pagination
               loop
-              showControls
               classNames={{
                 cursor:
                   "bg-darkBlue shadow-lg from-default-500 to-default-800 dark:from-default-300 dark:to-default-100 text-white font-bold",
@@ -101,7 +147,17 @@ export default function IndexPage({ nodes, count }: ProductosPageProps) {
               total={pages.length}
               initialPage={current + 1}
               onChange={(page: number) => {
-                router.push("/productos?page=" + (page - 1).toString());
+                if (params.get("brand")) {
+                  console.log(params.get("brand"));
+                  router.push(
+                    "/productos?page=" +
+                      (page - 1).toString() +
+                      "&brand=" +
+                      params.get("brand")
+                  );
+                } else {
+                  router.push("/productos?page=" + (page - 1).toString());
+                }
               }}
             />
           </div>
@@ -115,6 +171,7 @@ export async function getServerSideProps(
   context
 ): Promise<GetServerSidePropsResult<ProductosPageProps>> {
   var current = 0;
+  const brand = context.query.brand;
   if (context.query.page) {
     current = parseInt(context.query.page);
   }
@@ -133,10 +190,13 @@ export async function getServerSideProps(
       "field_product_brand",
     ])
     .addFields("user--user", ["field_name"])
-    // .addFields("taxonomy_term--product_brand", ["name", "path"])
+    .addFields("taxonomy_term--product_brand", ["name", "path"])
     .addFilter("status", "1")
-    // .addFilter("field_featured_product", "0")
     .addSort("created", "DESC");
+  if (brand) {
+    params.addFilter("field_product_brand.name", brand);
+  }
+
   const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
     "node--product",
     context,
@@ -151,6 +211,22 @@ export async function getServerSideProps(
       },
     }
   );
+  const brandsParams = new DrupalJsonApiParams().addFields(
+    "taxonomy_term--product_brands",
+    ["name", "path", "id"]
+  );
+  const brandsResult =
+    await drupal.getResourceCollectionFromContext<JsonApiResponse>(
+      "taxonomy_term--product_brands",
+      context,
+      {
+        deserialize: false,
+        params: {
+          ...brandsParams.getQueryObject(),
+        },
+      }
+    );
+
   if (!result.data?.length) {
     return {
       notFound: true,
@@ -158,9 +234,11 @@ export async function getServerSideProps(
   }
   const count = result.meta.count;
   const nodes = deserialize(result) as DrupalNode[];
+  const brands = deserialize(brandsResult) as DrupalTaxonomyTerm[];
   return {
     props: {
       nodes,
+      brands,
       count,
     },
   };
