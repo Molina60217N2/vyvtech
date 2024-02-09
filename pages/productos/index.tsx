@@ -104,7 +104,9 @@ export default function IndexPage({
               disallowEmptySelection
               selectionMode="single"
               selectedKeys={selectedKeys}
-              onSelectionChange={setSelectedKeys}
+              onSelectionChange={() => {
+                return setSelectedKeys;
+              }}
             >
               {brands.map((brand) => (
                 <DropdownItem
