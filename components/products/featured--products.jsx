@@ -9,7 +9,7 @@ export default function FeaturedProducts({ products, ...props }) {
     { width: 600, itemsToShow: 3, itemsToScroll: 3 },
   ];
   return (
-    <div className="p-5 h-max bg-featuredSection mb-4">
+    <div className="p-5 h-max bg-featuredSection">
       <div className={`md:w-4/5 m-auto`}>
         <h2
           className={`text-darkBlue text-center text-2xl font-bold w-1/2 mx-auto mb-4 pb-2 md:text-start md:mx-10 md:w-auto md:inline-block lg:mx-32 lg:text-4xl  ${styles.section_title}`}

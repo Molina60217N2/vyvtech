@@ -17,7 +17,7 @@ interface NodeProductTeaserProps {
 
 export function NodeProductTeaser({ node, ...props }: NodeProductTeaserProps) {
   return (
-    <div {...props} className="bg-EEF4F8 mt-4 shadow-xl rounded-xl">
+    <div {...props} className="bg-EEF4F8 mt-4 shadow-xl rounded-3xl">
       {/* card */}
       <div className="bg-white rounded-3xl h-full p-4 lg:max-w-80 drop-shadow-md">
         <div className="sm:max-h-72 md:max-h-48 lg:max-h-72 overflow-hidden">
