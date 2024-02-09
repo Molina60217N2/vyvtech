@@ -21,7 +21,7 @@ export default function Brands() {
           className="max-[820px]:ml-3"
         />
       </div>
-      <div className="pt-7 justify-center mx-auto flex col-start-5 col-end-7 max-[820px]:w-[150px] max-[820px]:pt-5 max-[575px]:w-[125px] max-[480px]:w-[110px] max-[360px]:pr-2 min-[910px]:pr-[35px]">
+      <div className="pt-7 min-[820px]:pt-7 min-[1450px]:pt-4 min-[1600px]:pt-7 justify-center mx-auto flex col-start-5 col-end-7 max-[820px]:w-[150px] max-[820px]:pt-5 max-[575px]:w-[125px] max-[480px]:w-[110px] max-[360px]:pr-2 min-[910px]:pr-[35px]">
         <Image
           src="/brands/kingston-logo.png"
           alt="Kingston Logo"
