@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/productos',
-        destination: '/producto?page=0'
+        destination: '/productos/page/0'
       },
     ]
   },
