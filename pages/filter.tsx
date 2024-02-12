@@ -35,9 +35,6 @@ export default function SearchPage() {
   //results[0] => nodos
   //results[1] => total de nodos
   //results[2] => pagina actual
-  // console.log(
-  //   Math.ceil(parseInt(results[results.length - 2] as unknown as string) / 24)
-  // );
 
   return (
     <Layout>
@@ -208,8 +205,6 @@ export default function SearchPage() {
 // export async function getStaticProps(
 //   context: GetStaticPropsContext
 // ): Promise<GetStaticPropsResult<SearchPageProps>> {
-//   console.log("CONTEXT")
-//   console.log(context)
 //   const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
 //     "node--product",
 //     context,
