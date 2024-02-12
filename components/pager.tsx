@@ -51,7 +51,7 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
                   className={classNames(
                     "flex items-center justify-center w-12 h-12 font-bold border-2 rounded-xl border-gray-300 bg-white hover:text-darkBlue",
                     {
-                      "text-darkBlue font-bold border-2 border-darkBlue":
+                      "text-red-600 font-bold border-2 border-darkBlue":
                         link.isCurrent,
                     }
                   )}

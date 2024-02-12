@@ -154,7 +154,7 @@ export async function getStaticProps(
       notFound: true,
     };
   }
-  const count = result.meta.count;
+  const count = Math.ceil(result.meta.count / PRODUCTS_PER_PAGE);
   const nodes = deserialize(result) as DrupalNode[];
   const brands = deserialize(brandsResult) as DrupalTaxonomyTerm[];
   return {
