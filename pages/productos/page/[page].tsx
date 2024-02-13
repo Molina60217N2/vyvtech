@@ -14,6 +14,7 @@ import {
 } from "next-drupal";
 import { Layout } from "@/components/layout";
 import { NodeProductTeaser } from "@/components/products/node--product--teaser";
+import FilterBtns from "@/components/products/filters-btns";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -30,19 +31,27 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import React from "react";
 import { PagerProps, Pager } from "components/pager";
+import { flightRouterStateSchema } from "next/dist/server/app-render/types";
 interface ProductosPageProps {
   nodes: DrupalNode[];
   brands: DrupalTaxonomyTerm[];
+  categories: DrupalTaxonomyTerm[];
   page: Pick<PagerProps, "current" | "total">;
 }
 const PRODUCTS_PER_PAGE = 24;
-export default function IndexPage({ nodes, page, brands }: ProductosPageProps) {
+export default function IndexPage({
+  nodes,
+  page,
+  brands,
+  categories,
+}: ProductosPageProps) {
   const router = useRouter();
   return (
     <Layout>
       <div className="pt-7 pb-7 md:pt-14">
         <h1>Pagina de producots</h1>
         <h1>{page.total}</h1>
+        <FilterBtns categories={categories} brands={brands} />
         <div
           className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 min-[1550px]:grid-cols-4`}
         >
@@ -149,6 +158,21 @@ export async function getStaticProps(
       }
     );
 
+  const categoriesParams = new DrupalJsonApiParams().addFields(
+    "taxonomy_term--product_categories",
+    ["name", "path", "id"]
+  );
+  const categoriesResult =
+    await drupal.getResourceCollectionFromContext<JsonApiResponse>(
+      "taxonomy_term--product_categories",
+      context,
+      {
+        deserialize: false,
+        params: {
+          ...categoriesParams.getQueryObject(),
+        },
+      }
+    );
   if (!result.data?.length) {
     return {
       notFound: true,
@@ -157,10 +181,12 @@ export async function getStaticProps(
   const count = Math.ceil(result.meta.count / PRODUCTS_PER_PAGE);
   const nodes = deserialize(result) as DrupalNode[];
   const brands = deserialize(brandsResult) as DrupalTaxonomyTerm[];
+  const categories = deserialize(categoriesResult) as DrupalTaxonomyTerm[];
   return {
     props: {
       nodes,
       brands,
+      categories,
       page: {
         current,
         total: count,
