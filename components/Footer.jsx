@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="bg-[#105A8B] min-[1130px]:grid min-[1530px]:grid-cols-[575px,441px] min-[1130px]:grid-cols-[400px,441px] flex-col py-16 min-[470px]:px-36 px-0">
+        <div className="bg-[#105A8B] min-[1130px]:grid min-[1600px]:grid-cols-[588px,441px] min-[1281px]:grid-cols-[400px,441px] min-[1130px]:grid-cols-[300px,441px] flex-col py-16 min-[1281px]:px-36 min-[1130px]:px-[122px] max-[471px]:px-0">
           <div className="flex min-[1130px]:justify-start justify-center">
             <Link href="/">
               <Image
@@ -20,7 +20,7 @@ export default function Footer() {
             </Link>
           </div>
           <div className="text-white text-[20px] font-bold flex-col flex min-[1130px]:mt-0 mt-12">
-            <ul className="min-[1130px]:inline-flex min-[1130px]:flex-none gap-14 text-center">
+            <ul className="min-[1130px]:inline-flex min-[1130px]:flex-none gap-14 justify-center text-center">
               <li>
                 <Link href="/">Inicio</Link>
               </li>
@@ -101,7 +101,7 @@ export default function Footer() {
                   </svg>
                 </Link>
               </li>
-              <li>
+              <li className="my-auto">
                 <Link href="/">
                   <svg
                     width="30"

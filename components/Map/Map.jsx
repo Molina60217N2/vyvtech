@@ -1,15 +1,15 @@
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 export default function Map() {
 
-  const position = [9.978585618135108, -84.7251802159246]
+  const position = [9.978585618135108, -84.7251802159246];
 
   return (
     <MapContainer
-      className="max-w-[1400px] h-[500px] border rounded-xl mb-32 mx-auto max-[1400px]:mx-5"
+      className="max-w-[1400px] min-[700px]:h-[700px] h-[500px] border rounded-xl mb-32 mx-auto max-[1400px]:mx-5"
       center={position}
       zoom={16}
       scrollWheelZoom={true}
