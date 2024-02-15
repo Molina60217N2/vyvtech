@@ -1,24 +1,27 @@
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
-import { DrupalNode, deserialize } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm, deserialize, getResourceCollectionFromContext, JsonApiResponse } from "next-drupal";
 
 import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
-import { NodeArticleTeaser } from "components/node--article--teaser"
 import { NodeProductTeaser } from "components/products/node--product--teaser"
 import FeaturedProducts from "components/products/featured--products"
 import Brands from "components/brands-static/brands"
 import Services from '@/components/homepage/Services'
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+import Category from "@/components/homepage/Category";
+
 interface IndexPageProps {
   featured: DrupalNode[];
   nodes: DrupalNode[];
+  tags: DrupalTaxonomyTerm[];
 }
 
-export default function IndexPage({ featured, nodes }: IndexPageProps) {
+export default function IndexPage({ featured, nodes, tags }: IndexPageProps) {
   return (
     <Layout>
       <Head>
-        <title>Next.js for Drupal</title>
+        <title>VyV Technology</title>
         <meta
           name="description"
           content="A Next.js site powered by a Drupal backend."
@@ -42,6 +45,7 @@ export default function IndexPage({ featured, nodes }: IndexPageProps) {
           ))}
         </div>
       </div>
+      <Category tags={tags}/>
     </Layout>
   );
 }
@@ -69,17 +73,34 @@ export async function getStaticProps(
     {
       params: {
         "fields[node--product]":
-          "title,path,field_product_image,uid,created,field_product_price,field_product_brand",
-        include: "field_product_image,uid,field_product_brand",
+          "title,path,field_product_image,uid,created,field_product_price,field_product_brand,field_product_category",
+        include: "field_product_image,uid,field_product_brand,field_product_category",
         "page[limit]": 24,
       },
     }
   );
 
+const tagParams = new DrupalJsonApiParams()
+  .addFields("taxonomy_term--product_categories", ["name","path",])
+
+const tagsResult = await getResourceCollectionFromContext<JsonApiResponse>(
+  "taxonomy_term--product_categories",
+  context,
+  {
+    params: {
+      ...tagParams.getQueryObject(),
+    }
+  }
+)
+const tags = deserialize(tagsResult) as DrupalTaxonomyTerm[]
+
+
+
   return {
     props: {
       featured,
       nodes,
+      tags,
     },
   };
 }
