@@ -158,9 +158,11 @@ export async function getStaticProps(
       }
     );
 
-  const categoriesParams = new DrupalJsonApiParams().addFields(
+  const categoriesParams = new DrupalJsonApiParams()
+    .addInclude(["field_category_image"])
+    .addFields(
     "taxonomy_term--product_categories",
-    ["name", "path", "id"]
+    ["name", "path", "id", "uri", "url"]
   );
   const categoriesResult =
     await drupal.getResourceCollectionFromContext<JsonApiResponse>(

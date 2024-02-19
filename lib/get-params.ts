@@ -22,14 +22,17 @@ export function getParams(
             "field_product_category",
             "field_product_brand"
         ])
-        .addFields("taxonomy_term--product_categories", ["name", "patch"])
+        .addFields("taxonomy_term--product_categories", ["name", "patch", "uri", "url"])
         .addFields("taxonomy_term--product_brands", ["name", "patch"])
     }
 
     if(name === "taxonomy_term--product_categories"){
-        return params.addFields("taxonomy_term--product_categories", ["name", "patch"])
+        return params
+        .addInclude(["field_category_image","uid"])
+        .addFields("taxonomy_term--product_categories", ["name", "patch", "uri", "url"])
     }
     if(name === "taxonomy_term--product_brands"){
-        return params.addFields("taxonomy_term--product_brands", ["name", "patch"])
+        return params
+        .addFields("taxonomy_term--product_brands", ["name", "patch"])
     }
 }
