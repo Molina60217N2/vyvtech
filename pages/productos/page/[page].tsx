@@ -53,14 +53,10 @@ export default function IndexPage({
         <h1>{page.total}</h1>
         <FilterBtns categories={categories} brands={brands} />
         <div
-          className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 min-[1550px]:grid-cols-4`}
+          className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4`}
         >
           {nodes?.length ? (
-            nodes.map((node) => (
-              <div key={node.id}>
-                <NodeProductTeaser node={node} />
-              </div>
-            ))
+            nodes.map((node) => <NodeProductTeaser node={node} key={node.id} />)
           ) : (
             <p className="py-4">No nodes found</p>
           )}
