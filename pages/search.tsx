@@ -124,8 +124,8 @@ export default function SearchPage() {
             <span className="font-bold text-darkBlue">{keys}</span>
           </h1>
           <div className="grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
-            {results.map((result) => (
-              <div className="bg-EEF4F8 mt-4 shadow-xl rounded-3xl">
+            {results.map((result, key) => (
+              <div key={key} className="bg-EEF4F8 mt-4 shadow-xl rounded-3xl">
                 {/* card */}
                 <div className="bg-white rounded-3xl h-full p-4 lg:max-w-80 drop-shadow-md">
                   <div className="sm:max-h-72 md:max-h-48 lg:max-h-72 overflow-hidden">
