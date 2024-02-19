@@ -2,7 +2,6 @@ import * as React from "react";
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import styles from "@/components/FormSearch.module.css";
 import { Input, Button } from "@nextui-org/react";
 
 interface FormSearchProps extends React.HTMLProps<HTMLFormElement> {}

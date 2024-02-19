@@ -1,21 +1,29 @@
-import useSWRImmutable from "swr/immutable"
-import { useRouter } from "next/router"
-import { JsonApiResource, DrupalNode } from "next-drupal"
+import useSWRImmutable from "swr/immutable";
+import { useRouter } from "next/router";
+import { JsonApiResource, DrupalNode } from "next-drupal";
 
 type SearchResult = Pick<
   JsonApiResource,
-  "type" | "id" | "title" | "path" | "created" | "field_product_image" | "field_product_body"
->
+  | "type"
+  | "id"
+  | "title"
+  | "path"
+  | "created"
+  | "field_product_image"
+  | "field_product_body"
+  | "field_product_brand"
+  | "field_product_price"
+>;
 
 interface Search {
-  isLoading?: boolean
-  isError?: boolean
-  results: SearchResult[]
-  keys: string
+  isLoading?: boolean;
+  isError?: boolean;
+  results: SearchResult[];
+  keys: string;
 }
 
 export function useSearch(keys: string): Search {
-  const router = useRouter()
+  const router = useRouter();
 
   const { data, error } = useSWRImmutable<SearchResult[]>(
     keys ? `api/search/${keys}/${router.locale}` : null,
@@ -27,16 +35,16 @@ export function useSearch(keys: string): Search {
           locale: router.locale,
           defaultLocale: router.defaultLocale,
         }),
-      })
+      });
 
-      return response.json()
+      return response.json();
     }
-  )
+  );
 
   return {
     isLoading: !error && !data,
     isError: error,
     results: data,
     keys: keys,
-  }
+  };
 }

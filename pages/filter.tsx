@@ -47,7 +47,7 @@ export default function SearchPage() {
       </Head>
       <div className="justify-center items-center flex">
         {/* LOADING */}
-        {isLoading && brand && category && (
+        {isLoading && (
           <div
             aria-label="Loading..."
             role="status"
