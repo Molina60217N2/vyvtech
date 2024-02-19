@@ -35,6 +35,9 @@ export default function SearchPage() {
   //results[0] => nodos
   //results[1] => total de nodos
   //results[2] => pagina actual
+  const loader = Array(24)
+    .fill(null)
+    .map((_, i) => i + 1);
 
   return (
     <Layout>
@@ -48,88 +51,23 @@ export default function SearchPage() {
       <div className="justify-center items-center flex">
         {/* LOADING */}
         {isLoading && (
-          <div
-            aria-label="Loading..."
-            role="status"
-            className="flex items-center"
-          >
-            <svg
-              className="h-20 w-20 animate-spin stroke-gray-500"
-              viewBox="0 0 256 256"
-            >
-              <line
-                x1="128"
-                y1="32"
-                x2="128"
-                y2="64"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="195.9"
-                y1="60.1"
-                x2="173.3"
-                y2="82.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="224"
-                y1="128"
-                x2="192"
-                y2="128"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="195.9"
-                y1="195.9"
-                x2="173.3"
-                y2="173.3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="128"
-                y1="224"
-                x2="128"
-                y2="192"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="60.1"
-                y1="195.9"
-                x2="82.7"
-                y2="173.3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="32"
-                y1="128"
-                x2="64"
-                y2="128"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="60.1"
-                y1="60.1"
-                x2="82.7"
-                y2="82.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-            </svg>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
+            {loader.map((item) => (
+              <div
+                key={item}
+                className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse"
+              >
+                <div className="h-48 bg-gray-300"></div>
+                <div className="px-6 py-4">
+                  <div className="h-6 bg-gray-300 mb-2"></div>
+                  <div className="h-4 bg-gray-300 w-2/3"></div>
+                </div>
+                <div className="px-6 pt-4 pb-2">
+                  <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                  <div className="h-4 bg-gray-300 w-1/2"></div>
+                </div>
+              </div>
+            ))}
           </div>
         )}
         {/* Resultados de los filtros */}
@@ -139,7 +77,42 @@ export default function SearchPage() {
             <h1 className="pb-10 text-center text-5xl max-[768px]:text-2xl"></h1>
             <div className="grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
               {results.slice(0, results.length - 2).map((result, key) => (
-                <div key={key}>{result.title}</div>
+                <div key={key} className="bg-EEF4F8 mt-4 shadow-xl rounded-3xl">
+                  {/* card */}
+                  <div className="bg-white rounded-3xl h-full p-4 lg:max-w-80 drop-shadow-md">
+                    <div className="sm:max-h-72 md:max-h-48 lg:max-h-72 overflow-hidden">
+                      <Image
+                        src={absoluteUrl(result.field_product_image.uri.url)}
+                        alt={result.field_product_image.resourceIdObjMeta.alt}
+                        width={800}
+                        height={400}
+                        // objectFit="contain"
+                        className="rounded-t-md"
+                      />
+                    </div>
+                    <div className="grid gap-3">
+                      <p className="text-sm text-darkBlue font-bold md:text-lg mt-8">
+                        {result.title}
+                      </p>
+                      <p className="text-sm md:text-base font-normal text-lightGray">
+                        {result.field_product_brand.name}
+                      </p>
+                      <p className="text-sm text-darkBlue font-bold md:text-lg">
+                        ¢{result.field_product_price}
+                      </p>
+                      <Link
+                        href={result.path.alias}
+                        className="flex justify-center"
+                      >
+                        <Button className="bg-darkBlue rounded-3xl">
+                          <span className="text-sm md:text-base text-white">
+                            Ver producto
+                          </span>
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
             <Pager

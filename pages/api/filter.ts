@@ -26,6 +26,7 @@ export default async function handler(
         "created",
         "field_product_image",
         "path",
+        "field_product_price",
         "field_product_brand",
         "field_product_category"
       ])

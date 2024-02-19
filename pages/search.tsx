@@ -7,6 +7,7 @@ import { absoluteUrl } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
+import Error from "@/public/404.jpg";
 
 export default function SearchPage() {
   const router = useRouter();
@@ -17,7 +18,9 @@ export default function SearchPage() {
       setKeys(router.query.keys as string);
     }
   }, [router]);
-
+  const loader = Array(24)
+    .fill(null)
+    .map((_, i) => i + 1);
   return (
     <Layout>
       <Head>
@@ -29,91 +32,23 @@ export default function SearchPage() {
       </Head>
       {/* LOADING */}
       {isLoading && keys && (
-        <div
-          aria-label="Loading..."
-          role="status"
-          className="flex items-center"
-        >
-          <svg
-            className="h-20 w-20 animate-spin stroke-gray-500"
-            viewBox="0 0 256 256"
-          >
-            <line
-              x1="128"
-              y1="32"
-              x2="128"
-              y2="64"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="195.9"
-              y1="60.1"
-              x2="173.3"
-              y2="82.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="224"
-              y1="128"
-              x2="192"
-              y2="128"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="195.9"
-              y1="195.9"
-              x2="173.3"
-              y2="173.3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="128"
-              y1="224"
-              x2="128"
-              y2="192"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="60.1"
-              y1="195.9"
-              x2="82.7"
-              y2="173.3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="32"
-              y1="128"
-              x2="64"
-              y2="128"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-            <line
-              x1="60.1"
-              y1="60.1"
-              x2="82.7"
-              y2="82.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="24"
-            ></line>
-          </svg>
-          <span className="max-[768px]:text-2xl text-4xl font-medium text-gray-500">
-            Buscando {keys}
-          </span>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
+          {loader.map((item) => (
+            <div
+              key={item}
+              className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse"
+            >
+              <div className="h-48 bg-gray-300"></div>
+              <div className="px-6 py-4">
+                <div className="h-6 bg-gray-300 mb-2"></div>
+                <div className="h-4 bg-gray-300 w-2/3"></div>
+              </div>
+              <div className="px-6 pt-4 pb-2">
+                <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                <div className="h-4 bg-gray-300 w-1/2"></div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
       {/* Resultados de la busqueda */}
@@ -164,6 +99,62 @@ export default function SearchPage() {
             ))}
           </div>
         </div>
+      ) : null}
+      {!isLoading && !results?.length ? (
+        <section className="pb-10 pt-5">
+          <div className="flex flex-col items-center justify-center">
+            <div>
+              <h2 className="text-center text-6xl font-bold text-[#0F5C9A]">
+                Oops.
+              </h2>
+            </div>
+            <div className="py-3">
+              <h4 className="text-center text-xl">
+                No podemos encontrar el producto que estas buscando
+              </h4>
+            </div>
+            <div className="pb-3">
+              <p className="text-center text-sm">
+                Es posible que haya caducado o que haya un error tipográfico.
+                Tal vez puedas encontrar lo que necesitas en nuestra página de
+                productos.
+              </p>
+            </div>
+            <div className="pt-3">
+              <Button
+                as={Link}
+                href="/productos"
+                className="bg-[#0F5C9A] tex-[18px] font-bold text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 15"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M13 7.57371L7.5 2.37591L2 7.57371V12.6241H13V7.57371ZM6.81314 0.273208L0 6.712V14.6241H15V6.712L8.18686 0.273209C7.8014 -0.0910692 7.1986 -0.0910698 6.81314 0.273208Z"
+                    fill="white"
+                  />
+                </svg>
+                Volver al inicio
+              </Button>
+            </div>
+            <div className="pt-5">
+              <Image
+                className="rounded-3xl"
+                src={Error}
+                alt="error"
+                width={600}
+                height={600}
+                placeholder="blur"
+              />
+            </div>
+          </div>
+        </section>
       ) : null}
     </Layout>
   );

@@ -12,6 +12,7 @@ type FilterResult = Pick<
   | "field_product_image"
   | "field_product_body"
   | "field_product_brand"
+  | "field_product_price"
 >;
 
 interface Filter {
