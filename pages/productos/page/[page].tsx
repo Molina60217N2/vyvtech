@@ -1,10 +1,5 @@
-import { getParams } from "@/lib/get-params";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
-import {
-  GetServerSidePropsResult,
-  GetStaticPathsResult,
-  GetStaticPropsResult,
-} from "next";
+import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { drupal } from "lib/drupal";
 import {
   DrupalNode,
@@ -15,23 +10,8 @@ import {
 import { Layout } from "@/components/layout";
 import { NodeProductTeaser } from "@/components/products/node--product--teaser";
 import FilterBtns from "@/components/products/filters-btns";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import {
-  Button,
-  Card,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Pagination,
-  Skeleton,
-} from "@nextui-org/react";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
 import React from "react";
 import { PagerProps, Pager } from "components/pager";
-import { flightRouterStateSchema } from "next/dist/server/app-render/types";
 interface ProductosPageProps {
   nodes: DrupalNode[];
   brands: DrupalTaxonomyTerm[];
@@ -45,13 +25,16 @@ export default function IndexPage({
   brands,
   categories,
 }: ProductosPageProps) {
-  const router = useRouter();
   return (
     <Layout>
       <div className="pt-7 pb-7 md:pt-14">
-        <h1>Pagina de producots</h1>
-        <h1>{page.total}</h1>
-        <FilterBtns categories={categories} brands={brands} />
+        <div className="grid bg-[#EEF4F8] p-10 align-center justify-center">
+          <h1 className="text-center mb-6 text-2xl font-bold text-darkBlue md:text-6xl">
+            Nuestros Productos
+          </h1>
+          <FilterBtns categories={categories} brands={brands} />
+        </div>
+
         <div
           className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4`}
         >

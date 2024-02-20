@@ -19,7 +19,7 @@ export default function FilterBtns({
   brands,
   ...props
 }: DropdownInterface) {
-  var url = "/filter?";
+  // var url = "/filter?";
   const itemsCategories = categories.map((category) => ({
     name: category.name,
   }));
@@ -36,18 +36,41 @@ export default function FilterBtns({
   function handleBrandClick(item) {
     setSelectedBrands(item.name);
   }
+  const [isButtonDisabled, setIsButtonDisabled] = React.useState(true);
+  useEffect(() => {
+    setIsButtonDisabled(!(selectedBrands || selectedCategories));
+  }, [selectedBrands, selectedCategories]);
   const router = useRouter();
 
   useEffect(() => {
     console.log(selectedCategories);
   }, [selectedCategories]);
   return (
-    <div>
+    <div className="flex flex-row gap-0 sm:gap-6">
       {/* Dropdown for Categories */}
       <Dropdown>
         <DropdownTrigger>
-          <Button variant="bordered">
+          <Button
+            variant="bordered"
+            className="bg-[#0F5C9A] text-white text-sm md:text-lg md:w-3/4"
+          >
             {selectedCategories || "Seleccionar categoria"}
+            <svg
+              width="23"
+              height="11"
+              viewBox="0 0 23 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.4 1.1875L13.25 9.3375C12.2875 10.3 10.7125 10.3 9.75001 9.3375L1.60001 1.1875"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Dynamic Actions" items={itemsCategories}>
@@ -64,8 +87,27 @@ export default function FilterBtns({
       {/* Dropdown for brands */}
       <Dropdown>
         <DropdownTrigger>
-          <Button variant="bordered">
+          <Button
+            variant="bordered"
+            className="bg-[#0F5C9A] text-white text-sm md:text-lg md:w-3/4"
+          >
             {selectedBrands || "Seleccionar marca"}
+            <svg
+              width="23"
+              height="11"
+              viewBox="0 0 23 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.4 1.1875L13.25 9.3375C12.2875 10.3 10.7125 10.3 9.75001 9.3375L1.60001 1.1875"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Dynamic Actions" items={itemsBrands}>
@@ -80,20 +122,23 @@ export default function FilterBtns({
         </DropdownMenu>
       </Dropdown>
       {/* boton para ir a la pagina con items filtrados */}
-      <Button
-        onClick={() => {
-          var url = `/filter?`;
-          if (selectedBrands && selectedBrands !== "") {
-            url += `&brand=` + selectedBrands;
-          }
-          if (selectedCategories && selectedCategories !== "") {
-            url += `&category=` + selectedCategories;
-          }
-          router.push(url);
-        }}
-      >
-        Filtrar Productos
-      </Button>
+      {(selectedBrands || selectedCategories) && (
+        <Button
+          className="bg-green-700 text-white text-sm md:text-lg md:w-3/4"
+          onClick={() => {
+            var url = `/filter?`;
+            if (selectedBrands && selectedBrands !== "") {
+              url += `&brand=` + selectedBrands;
+            }
+            if (selectedCategories && selectedCategories !== "") {
+              url += `&category=` + selectedCategories;
+            }
+            router.push(url);
+          }}
+        >
+          Filtrar Productos
+        </Button>
+      )}
     </div>
   );
 }
