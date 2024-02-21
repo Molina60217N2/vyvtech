@@ -46,7 +46,7 @@ export default function FilterBtns({
     console.log(selectedCategories);
   }, [selectedCategories]);
   return (
-    <div className="flex flex-row gap-0 sm:gap-6">
+    <div className="flex flex-col md:flex-row gap-2 sm:gap-6">
       {/* Dropdown for Categories */}
       <Dropdown>
         <DropdownTrigger>
@@ -54,7 +54,7 @@ export default function FilterBtns({
             variant="bordered"
             className="bg-[#0F5C9A] text-white text-sm md:text-lg md:w-3/4"
           >
-            {selectedCategories || "Seleccionar categoria"}
+            {selectedCategories || "Selecc. categoria"}
             <svg
               width="23"
               height="11"
@@ -91,7 +91,7 @@ export default function FilterBtns({
             variant="bordered"
             className="bg-[#0F5C9A] text-white text-sm md:text-lg md:w-3/4"
           >
-            {selectedBrands || "Seleccionar marca"}
+            {selectedBrands || "Selecc. marca"}
             <svg
               width="23"
               height="11"
