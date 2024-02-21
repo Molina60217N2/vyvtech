@@ -74,10 +74,32 @@ export default function SearchPage() {
           </div>
         )}
         {/* Resultados de los filtros */}
+
         {results?.length ? (
           <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-1 w-full">
-            <div className="ml-10 mt-10 max-[768px]:ml-3 max-[900px]:mt-5 max-[900px]:mb-8"></div>
-            <h1 className="pb-10 text-center text-5xl max-[768px]:text-2xl"></h1>
+            <div className="flex flex-col items-center justify-center mt-3 mb-3 gap-4 md:flex-row md:mt-10 md:mb-6">
+              <div className="flex flex-col md:flex-row gap-1.5 text-lightBlue font-extrabold">
+                {category ? (
+                  <h1 className="text-center text-3xl md:text-4xl max-[768px]:text-2x">
+                    {category}
+                  </h1>
+                ) : (
+                  ""
+                )}
+                {brand ? (
+                  <h1 className="text-center text-3xl md:text-4xl max-[768px]:text-2x">
+                    {brand}
+                  </h1>
+                ) : (
+                  ""
+                )}
+              </div>
+              <Link href={"/productos"}>
+                <Button size="lg" className="text-2xl bg-darkBlue text-white">
+                  Limpiar Filtros
+                </Button>
+              </Link>
+            </div>
             <div className="grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
               {results.slice(0, results.length - 2).map((result, key) => (
                 <div key={key} className="bg-EEF4F8 mt-4 shadow-xl rounded-3xl">
