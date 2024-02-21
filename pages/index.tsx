@@ -17,10 +17,10 @@ export default function IndexPage({ featured, nodes }: IndexPageProps) {
   return (
     <Layout>
       <Head>
-        <title>Next.js for Drupal</title>
+        <title>V&V Technologies</title>
         <meta
           name="description"
-          content="A Next.js site powered by a Drupal backend."
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
         />
       </Head>
       <div>

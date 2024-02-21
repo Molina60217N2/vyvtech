@@ -48,7 +48,7 @@ export default function SearchPage() {
         </title>
         <meta
           name="description"
-          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
         />
       </Head>
       <div className="justify-center items-center flex">

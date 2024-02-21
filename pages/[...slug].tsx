@@ -27,7 +27,10 @@ export default function NodePage({
     <Layout>
       <Head>
         <title>{resource.title || resource.name}</title>
-        <meta name="description" content="A Next.js site powered by Drupal." />
+        <meta
+          name="description"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
+        />
       </Head>
       {resource.type === "node--product" && (
         <NodeProduct
