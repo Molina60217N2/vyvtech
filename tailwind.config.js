@@ -13,7 +13,8 @@ module.exports = {
       colors:{
         darkBlue: "#122049",
         lightGray: "#737373",
-        featuredSection: "#EEF4F8"
+        featuredSection: "#EEF4F8",
+        lightBlue: "#105A8B"
       }
     },
   },
