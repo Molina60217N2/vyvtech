@@ -42,10 +42,13 @@ export default function SearchPage() {
   return (
     <Layout>
       <Head>
-        <title>Filtros</title>
+        <title>
+          {category ? category + " " : ""}
+          {brand ? brand : ""}
+        </title>
         <meta
           name="description"
-          content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio"
         />
       </Head>
       <div className="justify-center items-center flex">
