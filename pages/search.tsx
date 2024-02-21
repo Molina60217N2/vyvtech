@@ -27,7 +27,7 @@ export default function SearchPage() {
         <title>{keys} | V&V Technologies</title>
         <meta
           name="description"
-          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
         />
       </Head>
       {/* LOADING */}
