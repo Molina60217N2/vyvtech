@@ -81,8 +81,8 @@ export async function getStaticProps(
   );
 
 const tagParams = new DrupalJsonApiParams()
-// .addInclude(["field_category_image","uid"])
-.addFields("taxonomy_term--product_categories", ["name", "path", "uri", "url"])
+.addInclude(["field_category_image"])
+.addFields("taxonomy_term--product_categories", ["name", "path", "field_category_image", "uri", "url"])
 
 const tagsResult = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
   "taxonomy_term--product_categories",

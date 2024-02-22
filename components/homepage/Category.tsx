@@ -10,7 +10,7 @@ interface CategoryInterface {
 
 export default function Category({ tags, ...props }: CategoryInterface) {
   return (
-    <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+    <div className="gap-4 py-10 px-5 grid grid-cols-2 sm:grid-cols-4">
       {tags.map((item, index) => (
         <Link key={index} href={item.path.alias} passHref>
             <Card as="a" shadow="sm" isPressable>
@@ -22,14 +22,13 @@ export default function Category({ tags, ...props }: CategoryInterface) {
                 alt={item.name}
                 className="w-full object-cover h-[140px]"
                 src={absoluteUrl(item.field_category_image)}
-              />
+                />
             </CardBody>
-            <CardFooter className="text-small justify-between">
+            <CardFooter className="font-bold text-2xl justify-center">
               <b>{item.name}</b>
             </CardFooter>
           </Card>
         </Link>
-        
       ))}
     </div>
   );
