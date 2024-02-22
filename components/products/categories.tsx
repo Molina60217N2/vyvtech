@@ -30,7 +30,7 @@ export default function Categories({
         <Carousel itemsToShow={3} breakPoints={breakPoints} isRTL={false}>
           {categoriesDescription.map((category, key) => (
             <div key={key}>
-              <Link href={`http://localhost:3000/filter?&category=${category.attributes.name}`} passHref>
+              <Link href={`filter?&category=${category.attributes.name}`} passHref>
                 <Card
                   shadow="sm"
                   className="overflow-visible pt-10 px-10 bg-[#0f5b9ab2]"
