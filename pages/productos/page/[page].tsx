@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { drupal } from "lib/drupal";
@@ -27,6 +28,25 @@ export default function IndexPage({
 }: ProductosPageProps) {
   return (
     <Layout>
+      <Head>
+        <title>Productos | V&V Technologies</title>
+        <meta
+          name="description"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
+        />
+        <meta
+          property="og:image"
+          content="https://www.vyvtechnologies.com/logo.png"
+        />
+        <meta property="og:title" content="Productos | V&V Technologies" />
+        <meta
+          property="og:description"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
+        />
+        <meta property="og:url" content="https://www.vyvtechnologies.com/" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="600" />
+      </Head>
       <div className="pt-7 pb-7 md:pt-14">
         <div className="grid bg-[#EEF4F8] p-10 align-center justify-center">
           <h1 className="text-center mb-6 text-2xl font-bold text-darkBlue md:text-6xl">

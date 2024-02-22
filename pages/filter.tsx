@@ -44,12 +44,24 @@ export default function SearchPage() {
       <Head>
         <title>
           {category ? category + " " : ""}
-          {brand ? brand : ""}
+          {brand ? brand + " " : ""} | V&V Technologies
         </title>
         <meta
           name="description"
           content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
         />
+        <meta
+          property="og:image"
+          content="https://www.vyvtechnologies.com/logo.png"
+        />
+        <meta property="og:title" content="V&V Technologies" />
+        <meta
+          property="og:description"
+          content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
+        />
+        <meta property="og:url" content="https://www.vyvtechnologies.com/" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="600" />
       </Head>
       <div className="justify-center items-center flex">
         {/* LOADING */}
