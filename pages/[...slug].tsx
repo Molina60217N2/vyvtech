@@ -10,6 +10,7 @@ import {
 import { Layout } from "components/layout";
 import { PageProps } from "@/types";
 import { getParams } from "@/lib/get-params";
+import { absoluteUrl } from "@/lib/utils";
 
 const RESOURCE_TYPES = [];
 
@@ -26,11 +27,19 @@ export default function NodePage({
   return (
     <Layout>
       <Head>
-        <title>{resource.title || resource.name}</title>
+        <title>{resource.title || resource.name} | V&V Technologies</title>
         <meta
           name="description"
           content="V&V Technologies, encuentra tus productos de mejor calidad al mejor precio."
         />
+        {resource.type == "node--product" ? (
+          <meta
+            name="og:image:secure_url"
+            content={absoluteUrl(resource.field_product_image.uri.url)}
+          />
+        ) : (
+          ""
+        )}
       </Head>
       {resource.type === "node--product" && (
         <NodeProduct
