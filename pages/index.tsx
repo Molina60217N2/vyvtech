@@ -65,7 +65,12 @@ export default function IndexPage({
           ))}
         </div>
       </div>
-      <Categories categories={categories} />
+      <div className="bg-[#EEF4F8] py-10">
+      <h2 className="text-4xl text-darkBlue border-[#0F5C9A] border-b-4 font-bold mb-14 xl:ml-[315px] pt-14 max-[767px]:text-center md:w-[445px] max-[1024px]:max-w-[300px] max-[767px]:mx-auto max-[1024px]:text-2xl max-[636px]:max-w-[150px] max-[636px]:pt-12 max-[636px]:mb-9 md:ml-[255px] min-[769px]:ml-[155px]">
+        NUESTRAS CATEGORÍAS
+        </h2>
+      <Categories  categories={categories} />
+      </div>
     </Layout>
   );
 }

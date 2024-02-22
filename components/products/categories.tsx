@@ -1,6 +1,11 @@
 import { DrupalTaxonomyTerm } from "next-drupal";
 import Image from "next/image";
 import { absoluteUrl } from "lib/utils";
+import React from "react";
+import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import Link from "next/link";
+import Carousel from "@itseasy21/react-elastic-carousel";
+
 interface CategoriesInterface {
   categories: DrupalTaxonomyTerm[];
 }
@@ -11,25 +16,43 @@ export default function Categories({
 }: CategoriesInterface) {
   const categoriesDescription = categories["data"];
   const categoriesImages = categories["included"];
-  //   console.log("DESDE EL CATEGORIES XD");
-  //   console.log(categoriesDescription);
-  //   console.log(categoriesImages);
+
+  const breakPoints = [
+    { width: 550, itemsToShow: 1, itemsToScroll: 1, itemPadding: [0, 30] },
+    { width: 768, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 1024, itemsToShow: 3, itemsToScroll: 3 },
+    { width: 1200, itemsToShow: 4, itemsToScroll: 4 },
+  ];
+
   return (
-    <div className="bg-slate-500">
-      <h1>Categorias</h1>
-      {categoriesDescription.map((category, key) => (
-        <div key={key}>
-          <p>{category.attributes.name}</p>
-          <div>
-            <Image
-              src={absoluteUrl(categoriesImages[key].attributes.uri.url)}
-              width={100}
-              height={100}
-              alt="jeje"
-            ></Image>
-          </div>
-        </div>
-      ))}
+    <div className="h-max">
+      <div className={`md:w-11/12 m-auto`}>
+        <Carousel itemsToShow={3} breakPoints={breakPoints} isRTL={false}>
+          {categoriesDescription.map((category, key) => (
+            <div key={key}>
+              <Link href={`http://localhost:3000/filter?&category=${category.attributes.name}`} passHref>
+                <Card
+                  shadow="sm"
+                  className="overflow-visible pt-10 px-10 bg-[#0f5b9ab2]"
+                  style={{ width: '250px', height: '300px' }}
+                >
+                  <CardBody className="overflow-visible p-0">
+                    <Image
+                      src={absoluteUrl(categoriesImages[key].attributes.uri.url)}
+                      width={200}
+                      height={200}
+                      alt="jeje"
+                    />
+                  </CardBody>
+                  <CardFooter className="font-bold text-[18px] text-white justify-center">
+                    <b>{category.attributes.name}</b>
+                  </CardFooter>
+                </Card>
+              </Link>
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </div>
   );
 }
