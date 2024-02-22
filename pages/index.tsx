@@ -1,6 +1,11 @@
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
-import { DrupalNode, deserialize } from "next-drupal";
+import {
+  DrupalNode,
+  DrupalTaxonomyTerm,
+  JsonApiResource,
+  deserialize,
+} from "next-drupal";
 
 import { drupal } from "lib/drupal";
 import { Layout } from "components/layout";
@@ -8,12 +13,18 @@ import { NodeProductTeaser } from "components/products/node--product--teaser";
 import FeaturedProducts from "components/products/featured--products";
 import Brands from "components/brands-static/brands";
 import Services from "@/components/homepage/Services";
+import Categories from "@/components/products/categories";
 interface IndexPageProps {
   featured: DrupalNode[];
   nodes: DrupalNode[];
+  categories: DrupalTaxonomyTerm[];
 }
 
-export default function IndexPage({ featured, nodes }: IndexPageProps) {
+export default function IndexPage({
+  featured,
+  nodes,
+  categories,
+}: IndexPageProps) {
   return (
     <Layout>
       <Head>
@@ -54,6 +65,7 @@ export default function IndexPage({ featured, nodes }: IndexPageProps) {
           ))}
         </div>
       </div>
+      <Categories categories={categories} />
     </Layout>
   );
 }
@@ -87,11 +99,21 @@ export async function getStaticProps(
       },
     }
   );
+  const categories = await drupal.getResourceCollectionFromContext<
+    DrupalTaxonomyTerm[]
+  >("taxonomy_term--product_categories", context, {
+    deserialize: false,
+    params: {
+      "fields[taxonomy_term--product_categories]": "name, field_category_image",
+      include: "field_category_image",
+    },
+  });
 
   return {
     props: {
       featured,
       nodes,
+      categories,
     },
   };
 }
