@@ -34,7 +34,7 @@ export default function Navbarvyv() {
             <p className="font-bold md:text-lg">Categorias</p>
           </Link>
           <Link href="/acerca-del-negocio">
-            <p className="font-bold md:text-lg">Acerca del negocio</p>
+            <p className="font-bold md:text-lg">Sobre Nosotros</p>
           </Link>
         </div>
       </div>

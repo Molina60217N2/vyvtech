@@ -34,7 +34,7 @@ export default function Footer() {
             </ul>
             <ul className="gap-10 inline-flex justify-center mt-10">
               <li>
-                <Link href="/">
+                <Link href="/" aria-label="Página de Facebook">
                   <svg
                     width="30"
                     height="30"
@@ -61,7 +61,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/" aria-label="Contacto por WhatsApp">
                   <svg
                     width="30"
                     height="30"
@@ -102,7 +102,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="my-auto">
-                <Link href="/">
+                <Link href="/" aria-label="Contacto por correo electrónico">
                   <svg
                     width="30"
                     height="24"
