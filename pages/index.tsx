@@ -59,9 +59,7 @@ export default function IndexPage({
         </h2>
         <div className="grid min-[1279px]:grid-cols-4 grid-cols-2 justify-items-center max-[1365px]:mx-3 max-[1279px]:mx-20 gap-y-5 max-[800px]:mx-3 min-[1025px]:gap-5 max-[1024px]:gap-10 max-[600px]:gap-3">
           {nodes.map((node) => (
-            <div key={node.id}>
-              <NodeProductTeaser node={node} />
-            </div>
+            <NodeProductTeaser node={node} key={node.id} />
           ))}
         </div>
       </div>
@@ -92,10 +90,12 @@ export async function getStaticProps(
     context,
     {
       params: {
+        "filter[field_featured_product]": 0, //0 es false XD
         "fields[node--product]":
           "title,path,field_product_image,uid,created,field_product_price,field_product_brand",
         include: "field_product_image,uid,field_product_brand",
         "page[limit]": 24,
+        sort: "-created",
       },
     }
   );
