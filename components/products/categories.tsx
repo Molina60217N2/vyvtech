@@ -33,7 +33,7 @@ export default function Categories({
               <Link href={`filter?&category=${category.attributes.name}`} passHref>
                 <Card
                   shadow="sm"
-                  className="overflow-visible pt-10 px-10 bg-[#0f5b9ab2]"
+                  className="overflow-visible pt-10 px-10 bg-[#0f5b9ab2] cursor-pointer transition-transform transform hover:scale-90 active:scale-105"
                   style={{ width: '250px', height: '300px' }}
                 >
                   <CardBody className="overflow-visible p-0">
