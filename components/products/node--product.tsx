@@ -58,29 +58,27 @@ export function NodeProduct({
           <h1 className="text-center mb-4 text-[64px] font-black leading-tight max-[768px]:text-[36px]">
             {node.title}
           </h1>
-          <div className="flex gap-5 justify-center">
-            {node.field_product_category && (
-              <Link
-                key={node.field_product_category.id}
-                href={node.field_product_category.path.alias}
-              >
-                <Chip key={node.field_product_category.name}>
-                  {node.field_product_category.name}
-                </Chip>
-              </Link>
-            )}
-          </div>
           <h3 className="flex font-bold text-[32px] max-[768px]:text-[28px]">
             Marca:{" "}
-            <p className="pl-2 text-[32px] text-[#0F5C9A] max-[768px]:text-[28px]">
-              {node.field_product_brand.name}
-            </p>
+            <Link
+              href={`filter?&brand=${node.field_product_brand.name}`}
+              passHref
+            >
+              <p className="pl-2 text-[32px] text-[#0F5C9A] max-[768px]:text-[28px]">
+                {node.field_product_brand.name}
+              </p>
+            </Link>
           </h3>
           <h3 className="flex font-bold text-[32px] max-[768px]:text-[28px] py-5">
             Categoria:{" "}
-            <p className="pl-2 text-[32px] text-[#0F5C9A] max-[768px]:text-[28px]">
-              {node.field_product_category.name}
-            </p>
+            <Link
+              href={`filter?&category=${node.field_product_category.name}`}
+              passHref
+            >
+              <p className="pl-2 text-[32px] text-[#0F5C9A] max-[768px]:text-[28px]">
+                {node.field_product_category.name}
+              </p>
+            </Link>
           </h3>
           <h3 className="flex font-bold text-[40px] max-[768px]:text-[32px]">
             Precio:{" "}
