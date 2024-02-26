@@ -6,6 +6,7 @@ import { absoluteUrl, formatDate } from "lib/utils";
 import { NodeProductTeaser } from "./node--product--teaser";
 import Carousel from "@itseasy21/react-elastic-carousel";
 import styles from "./featured--products.module.css";
+import router from "next/router";
 
 export interface NodeProductProps {
   node: DrupalNode;
@@ -23,6 +24,15 @@ export function NodeProduct({
     { width: 550, itemsToShow: 1, itemsToScroll: 1, itemPadding: [0, 30] },
     { width: 600, itemsToShow: 3, itemsToScroll: 3 },
   ];
+  const openWhatsApp = () => {
+    const currentUrl = router.asPath;
+    const message = `Hola, me interesa este producto : ${
+      process.env.NEXT_PUBLIC_SITE_DOMAIN + currentUrl
+    }`;
+    const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
+
+    window.open(whatsappLink, "_blank");
+  };
 
   return (
     <article {...props}>
@@ -79,7 +89,10 @@ export function NodeProduct({
             </p>
           </h3>
           <div className="pt-5 max-[1024px]:flex max-[1024px]:justify-center ">
-            <Button className="bg-[#0F5C9A] font-bold text-center text-[32px] text-white py-6 max-[768px]:text-[26px] max-[360px]:text-[18px]">
+            <Button
+              onClick={openWhatsApp}
+              className="bg-[#0F5C9A] font-bold text-center text-[32px] text-white py-6 max-[768px]:text-[26px] max-[360px]:text-[18px]"
+            >
               Consultar Producto
               <svg
                 width="40"
