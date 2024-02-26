@@ -5,7 +5,7 @@ import styles from "./featured--products.module.css";
 
 export default function FeaturedProducts({ products, ...props }) {
   const breakPoints = [
-    { width: 550, itemsToShow: 1, itemsToScroll: 1, itemPadding: [0, 30] },
+    { width: 550, itemsToShow: 1, itemsToScroll: 1, pagination: false },
     { width: 600, itemsToShow: 3, itemsToScroll: 3 },
   ];
   return (
@@ -19,9 +19,7 @@ export default function FeaturedProducts({ products, ...props }) {
 
         <Carousel itemsToShow={3} breakPoints={breakPoints}>
           {products.map((product) => (
-            <div key={product.id}>
-              <NodeProductTeaser node={product} />
-            </div>
+            <NodeProductTeaser node={product} key={product.id} />
           ))}
         </Carousel>
       </div>
