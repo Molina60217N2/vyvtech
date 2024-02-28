@@ -132,26 +132,30 @@ export function NodeProduct({
           className="mt-6 pb-10 w-[84%] mx-auto text-[18px] leading-loose "
         />
       )}
-      <div className="p-10 h-max bg-featuredSection">
-        <div className={`md:w-4/5 m-auto`}>
-          <h2
-            className={`text-darkBlue text-center text-2xl font-bold w-1/2 mx-auto mb-4 pb-2 md:text-start md:mx-10 md:w-auto md:inline-block lg:mx-32 lg:text-4xl  ${styles.section_title}`}
-          >
-            PRODUCTOS RELACIONADOS
-          </h2>
-          <Carousel itemsToShow={3} breakPoints={breakPoints} isRTL={false}>
-            {additionalContent["relatedProducts"]?.length ? (
-              additionalContent["relatedProducts"].map((node) => (
-                <div key={node.id}>
-                  <NodeProductTeaser node={node} />
-                </div>
-              ))
-            ) : (
-              <p className="py-4">No nodes found</p>
-            )}
-          </Carousel>
+      {additionalContent["relatedProducts"].length ? (
+        <div className="p-10 h-max bg-featuredSection">
+          <div className={`md:w-4/5 m-auto`}>
+            <h2
+              className={`text-darkBlue text-center text-2xl font-bold w-1/2 mx-auto mb-4 pb-2 md:text-start md:mx-10 md:w-auto md:inline-block lg:mx-32 lg:text-4xl  ${styles.section_title}`}
+            >
+              PRODUCTOS RELACIONADOS
+            </h2>
+            <Carousel itemsToShow={3} breakPoints={breakPoints} isRTL={false}>
+              {additionalContent["relatedProducts"]?.length ? (
+                additionalContent["relatedProducts"].map((node) => (
+                  <div key={node.id}>
+                    <NodeProductTeaser node={node} />
+                  </div>
+                ))
+              ) : (
+                <p className="py-4">No nodes found</p>
+              )}
+            </Carousel>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </article>
   );
 }
