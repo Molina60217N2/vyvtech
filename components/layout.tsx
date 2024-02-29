@@ -15,7 +15,6 @@ interface LayoutInterface {
 }
 
 export function Layout({ children, navbarCategories }: React.PropsWithChildren<LayoutInterface> ) {
-  console.log(navbarCategories)
   return (
     <NextUIProvider className={cabin.className}>
       <PreviewAlert />
