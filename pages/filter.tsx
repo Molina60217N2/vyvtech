@@ -122,7 +122,7 @@ export default function SearchPage({navbarCategories}: FilterInterface) {
               {results.slice(0, results.length - 2).map((result, key) => (
                 <div key={key} className="bg-EEF4F8 mt-4 shadow-xl rounded-3xl">
                   {/* card */}
-                  <div className="bg-white rounded-3xl h-full p-4 lg:max-w-80 max-[640px]:max-w-[24rem] max-[1024px]:max-w-80 drop-shadow-md">
+                  <div className="bg-white rounded-3xl h-full p-4 lg:max-w-80 max-[390px]:max-w-80 max-[640px]:max-w-[24rem] max-[1024px]:max-w-80 drop-shadow-md">
                     <div className="sm:max-h-72 lg:max-h-72 overflow-hidden">
                       <Image
                         src={absoluteUrl(result.field_product_image.uri.url)}
