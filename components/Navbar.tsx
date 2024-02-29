@@ -76,7 +76,7 @@ export default function Navbarvyv({navbarCategories}: NavbarvyvInterface) {
             <DropdownMenu aria-label="Static Actions" className="overflow-y-auto max-h-60">
               {categories?.map((category, index) => (
                 <DropdownItem key={index} variant="bordered" color="primary" className="hover:bg-[#e7e7e7]" textValue="Items de las categorias">
-                  <Link href={`filter?&category=${category.attributes.name}`} passHref>
+                  <Link href={`/filter?&category=${category.attributes.name}`} passHref>
                     <p className="font-bold md:text-lg text-base text-darkBlue">{category.attributes.name}</p>
                   </Link>
                 </DropdownItem>
