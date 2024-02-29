@@ -4,10 +4,17 @@ import Image from "next/image";
 import Error from "@/public/404.jpg";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
+import { DrupalTaxonomyTerm } from "next-drupal";
+import { GetStaticPropsResult } from "next";
+import { drupal } from "@/lib/drupal";
 
-export default function NotFound(){
+interface NotFoundInterface {
+    navbarCategories: DrupalTaxonomyTerm[];
+}
+
+export default function NotFound({navbarCategories}: NotFoundInterface){
     return (
-        <Layout>
+        <Layout navbarCategories={navbarCategories}>
             <Head>
             <title>Pagina no encontrada</title>
             <meta
@@ -49,3 +56,24 @@ export default function NotFound(){
         </Layout>
     )
 }
+
+export async function getStaticProps(
+    context
+  ): Promise<GetStaticPropsResult<NotFoundInterface>> {
+
+    const navbarCategories = await drupal.getResourceCollectionFromContext<
+      DrupalTaxonomyTerm[]
+    >("taxonomy_term--product_categories", context, {
+      deserialize: false,
+      params: {
+        "fields[taxonomy_term--product_categories]": "name, field_category_image",
+        include: "field_category_image",
+      },
+    });
+
+    return {
+      props: {
+        navbarCategories,
+      },
+    };
+  }

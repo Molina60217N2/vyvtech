@@ -18,15 +18,17 @@ interface IndexPageProps {
   featured: DrupalNode[];
   nodes: DrupalNode[];
   categories: DrupalTaxonomyTerm[];
+  navbarCategories: DrupalTaxonomyTerm[];
 }
 
 export default function IndexPage({
   featured,
   nodes,
   categories,
+  navbarCategories,
 }: IndexPageProps) {
   return (
-    <Layout>
+    <Layout navbarCategories={navbarCategories}>
       <Head>
         <title>V&V Technologies</title>
         <meta
@@ -114,11 +116,22 @@ export async function getStaticProps(
     },
   });
 
+  const navbarCategories = await drupal.getResourceCollectionFromContext<
+    DrupalTaxonomyTerm[]
+  >("taxonomy_term--product_categories", context, {
+    deserialize: false,
+    params: {
+      "fields[taxonomy_term--product_categories]": "name, field_category_image",
+      include: "field_category_image",
+    },
+  });
+
   return {
     props: {
       featured,
       nodes,
       categories,
+      navbarCategories,
     },
   };
 }

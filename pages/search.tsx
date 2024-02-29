@@ -8,8 +8,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import Error from "@/public/404.jpg";
+import { DrupalTaxonomyTerm } from "next-drupal";
+import { GetStaticPropsResult } from "next";
+import { drupal } from "@/lib/drupal";
 
-export default function SearchPage() {
+interface SearchInterface {
+  navbarCategories: DrupalTaxonomyTerm[];
+}
+
+export default function SearchPage({ navbarCategories }: SearchInterface) {
   const router = useRouter();
   const [keys, setKeys] = React.useState<string>(null);
   const { isLoading, results } = useSearch(keys);
@@ -22,7 +29,7 @@ export default function SearchPage() {
     .fill(null)
     .map((_, i) => i + 1);
   return (
-    <Layout>
+    <Layout navbarCategories={navbarCategories}>
       <Head>
         <title>{keys} | V&V Technologies</title>
         <meta
@@ -170,4 +177,25 @@ export default function SearchPage() {
       ) : null}
     </Layout>
   );
+}
+
+export async function getStaticProps(
+  context
+): Promise<GetStaticPropsResult<SearchInterface>> {
+
+  const navbarCategories = await drupal.getResourceCollectionFromContext<
+    DrupalTaxonomyTerm[]
+  >("taxonomy_term--product_categories", context, {
+    deserialize: false,
+    params: {
+      "fields[taxonomy_term--product_categories]": "name, field_category_image",
+      include: "field_category_image",
+    },
+  });
+
+  return {
+    props: {
+      navbarCategories,
+    },
+  };
 }

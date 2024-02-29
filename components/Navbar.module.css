@@ -1,0 +1,17 @@
+.svgNormal {
+    transform: rotate(270deg);
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: space-between;
+    margin-right: 5px;
+    transition: ease 0.5s;
+}
+
+.svgHover {
+    transform: rotate(360deg);
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: space-between;
+    margin-right: 5px;
+    transition: ease 0.5s;
+}

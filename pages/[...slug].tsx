@@ -16,16 +16,18 @@ const RESOURCE_TYPES = [];
 
 interface NodePageProps extends PageProps {
   resource: DrupalNode | DrupalTaxonomyTerm;
+  navbarCategories: DrupalTaxonomyTerm[];
 }
 
 export default function NodePage({
   resource,
   additionalContent,
+  navbarCategories
 }: NodePageProps) {
   if (!resource) return null;
 
   return (
-    <Layout>
+    <Layout navbarCategories={navbarCategories}>
       <Head>
         <title>{resource.title || resource.name} | V&V Technologies</title>
         <meta
@@ -126,10 +128,21 @@ export async function getStaticProps(
     ];
   }
 
+const navbarCategories = await drupal.getResourceCollectionFromContext<
+  DrupalTaxonomyTerm[]
+>("taxonomy_term--product_categories", context, {
+  deserialize: false,
+  params: {
+    "fields[taxonomy_term--product_categories]": "name, field_category_image",
+    include: "field_category_image",
+  },
+});
+
   return {
     props: {
       resource,
       additionalContent,
+      navbarCategories,
     },
   };
 }
