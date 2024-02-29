@@ -2,10 +2,17 @@ import { Layout } from "@/components/layout";
 import Image from "next/image";
 import Map from "@/components/Map";
 import Head from "next/head";
+import { DrupalTaxonomyTerm } from "next-drupal";
+import { GetStaticPropsResult } from "next";
+import { drupal } from "@/lib/drupal";
 
-export default function AboutUs() {
+interface AboutUsInterface {
+  navbarCategories: DrupalTaxonomyTerm[];
+}
+
+export default function AboutUs({navbarCategories}: AboutUsInterface) {
   return (
-    <Layout>
+    <Layout navbarCategories={navbarCategories}>
       <Head>
         <title>Acerca de V&V Technologies</title>
         <meta
@@ -51,4 +58,25 @@ export default function AboutUs() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps(
+  context
+): Promise<GetStaticPropsResult<AboutUsInterface>> {
+
+  const navbarCategories = await drupal.getResourceCollectionFromContext<
+    DrupalTaxonomyTerm[]
+  >("taxonomy_term--product_categories", context, {
+    deserialize: false,
+    params: {
+      "fields[taxonomy_term--product_categories]": "name, field_category_image",
+      include: "field_category_image",
+    },
+  });
+
+  return {
+    props: {
+      navbarCategories,
+    },
+  };
 }

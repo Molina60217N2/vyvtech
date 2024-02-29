@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { DrupalNode, deserialize } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm, deserialize } from "next-drupal";
 import { absoluteUrl, formatDate } from "lib/utils";
 import { useSearch } from "hooks/use-search";
 import { Layout } from "components/layout";
@@ -11,8 +11,14 @@ import NotFound from "@/public/404.jpg";
 import Head from "next/head";
 import { useFilter } from "@/hooks/use-filter";
 import { PagerProps, Pager } from "components/pager";
+import { GetStaticPropsResult } from "next";
+import { drupal } from "@/lib/drupal";
 
-export default function SearchPage() {
+interface FilterInterface {
+  navbarCategories: DrupalTaxonomyTerm[];
+}
+
+export default function SearchPage({navbarCategories}: FilterInterface) {
   const router = useRouter();
   const [brand, setBrand] = React.useState<string>(null);
   const [category, setCategory] = React.useState<string>(null);
@@ -40,7 +46,7 @@ export default function SearchPage() {
     .map((_, i) => i + 1);
 
   return (
-    <Layout>
+    <Layout navbarCategories={navbarCategories}>
       <Head>
         <title>
           {category ? category + " " : ""}
@@ -230,3 +236,24 @@ export default function SearchPage() {
 //     },
 //   }
 // }
+
+export async function getStaticProps(
+  context
+): Promise<GetStaticPropsResult<FilterInterface>> {
+
+  const navbarCategories = await drupal.getResourceCollectionFromContext<
+    DrupalTaxonomyTerm[]
+  >("taxonomy_term--product_categories", context, {
+    deserialize: false,
+    params: {
+      "fields[taxonomy_term--product_categories]": "name, field_category_image",
+      include: "field_category_image",
+    },
+  });
+
+  return {
+    props: {
+      navbarCategories,
+    },
+  };
+}

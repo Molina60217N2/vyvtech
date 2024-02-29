@@ -4,18 +4,24 @@ import { PreviewAlert } from "components/preview-alert";
 import { NextUIProvider } from "@nextui-org/react";
 import { Cabin } from "next/font/google";
 import Navbarvyv from "@/components/Navbar";
+import { DrupalTaxonomyTerm } from "next-drupal";
 
 const cabin = Cabin({
   subsets: ["latin"],
 });
 
-export function Layout({ children }) {
+interface LayoutInterface {
+  navbarCategories: DrupalTaxonomyTerm[];
+}
+
+export function Layout({ children, navbarCategories }: React.PropsWithChildren<LayoutInterface> ) {
+  console.log(navbarCategories)
   return (
     <NextUIProvider className={cabin.className}>
       <PreviewAlert />
       <div className="flex flex-col min-h-screen">
         <header>
-          <Navbarvyv />
+          <Navbarvyv navbarCategories={navbarCategories}/>
         </header>
         <main className="flex-1">{children}</main>
         <Footer/>
