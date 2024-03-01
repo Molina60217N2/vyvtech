@@ -15,3 +15,12 @@
     margin-right: 5px;
     transition: ease 0.5s;
 }
+
+.svgColorHover svg path {
+    transition: ease-in-out 300ms;
+}
+
+.svgColorHover:hover svg path {
+    fill:#105A8B;
+    transition: ease-in-out 300ms;
+}

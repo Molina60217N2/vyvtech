@@ -1,0 +1,17 @@
+.underline_style {
+    border-bottom-width: 0;
+    background-image: linear-gradient(transparent, transparent), linear-gradient(#FFFFFF, #FFFFFF);
+    background-size: 0 4px;
+    background-position: 0% 105%;
+    background-repeat: no-repeat;
+    transition: background-size .5s ease-in-out;
+    font-size: 20px;
+    font-weight: bold;
+    color:#FFFFFF;
+    padding-bottom: 5px;
+  }
+
+.underline_style:hover {
+    background-size: 100% 4px;
+	background-position: 0% 105%;
+}
