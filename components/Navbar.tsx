@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from "@nextui-org/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from "@nextui-org/react";
 import { FormSearch } from "./form--search";
 import { DrupalTaxonomyTerm } from "next-drupal";
 import { useEffect, useRef, useState } from "react";
@@ -55,23 +55,24 @@ export default function Navbarvyv({navbarCategories}: NavbarvyvInterface) {
       <div className="mt-4 border-t-1 border-t-[#122049]">
         <div className="flex items-center space-x-6 pt-5 max-[640px]:justify-center max-[320px]:grid max-[320px]:grid-cols-2 max-[320px]:space-x-0 max-[320px]:justify-items-center max-[320px]:space-y-3">
           <Link href="/">
-            <p className="font-bold md:text-lg">Inicio</p>
+            <p className={`text-base font-bold md:text-lg text-darkBlue ease-in-out duration-300 hover:text-[#105A8B]`}>Inicio</p>
           </Link>
           <Link href="/productos">
-            <p className="font-bold md:text-lg">Productos</p>
+            <p className={`text-base font-bold md:text-lg text-darkBlue ease-in-out duration-300 hover:text-[#105A8B]`}>Productos</p>
           </Link>
           <Dropdown>
             <DropdownTrigger>
-              <div
-                className={`flex bg-transparent cursor-pointer font-bold text-base pointer md:text-lg text-darkBlue`}
+              <Button
+                className={`flex bg-transparent cursor-pointer md:text-lg hover:ease-out text-darkBlue ease-in-out duration-300 hover:text-[#105A8B] font-bold text-base pointer gap-0 ${styles.svgColorHover}`}
                 onClick={toggleRotation}
                 ref={divReference}
-              >
-                <svg className={hoverRotate ? `${styles.svgHover}` : `${styles.svgNormal}`} width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                disableRipple={true}
+                startContent={<svg className={hoverRotate ? `${styles.svgHover}` : `${styles.svgNormal}`} width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.75 0.5L7 6.75L13.25 0.5H0.75Z" fill="#122049"/>
-                </svg>
+                </svg>}
+              >
                 Categorías
-              </div>
+              </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions" className="overflow-y-auto max-h-60">
               {categories?.map((category, index) => (
@@ -84,7 +85,7 @@ export default function Navbarvyv({navbarCategories}: NavbarvyvInterface) {
             </DropdownMenu>
            </Dropdown>
           <Link href="/acerca-del-negocio">
-            <p className="font-bold md:text-lg">Sobre Nosotros</p>
+            <p className={`text-base font-bold md:text-lg text-darkBlue ease-in-out duration-300 hover:text-[#105A8B]`}>Sobre Nosotros</p>
           </Link>
         </div>
       </div>

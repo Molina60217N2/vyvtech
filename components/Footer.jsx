@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import styles from "@/components/Footer.module.css"
 
 export default function Footer() {
   const footerItems = ["Productos", "Acerca del Negocio"];
@@ -19,14 +20,14 @@ export default function Footer() {
               />
             </Link>
           </div>
-          <div className="text-white text-[20px] font-bold flex-col flex min-[1130px]:mt-0 mt-12">
+          <div className="flex-col flex min-[1130px]:mt-0 mt-12">
             <ul className="min-[1130px]:inline-flex min-[1130px]:flex-none gap-14 justify-center text-center">
               <li>
-                <Link href="/">Inicio</Link>
+                <Link href="/" className={`${styles.underline_style}`}>Inicio</Link>
               </li>
               {footerItems.map((item, index) => (
                 <li key={`${item}-${index}`} className="min-[1130px]:mt-0 mt-6">
-                  <Link href={`/${item.toLowerCase().replace(/\s/g, "-")}`}>
+                  <Link href={`/${item.toLowerCase().replace(/\s/g, "-")}`} className={`${styles.underline_style}`}>
                     {item}
                   </Link>
                 </li>
