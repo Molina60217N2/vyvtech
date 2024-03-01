@@ -53,11 +53,13 @@ export default function Navbarvyv({navbarCategories}: NavbarvyvInterface) {
 
       {/* Segunda sección: Enlaces */}
       <div className="mt-4 border-t-1 border-t-[#122049]">
-        <div className="flex items-center space-x-6 pt-5 max-[640px]:justify-center max-[320px]:grid max-[320px]:grid-cols-2 max-[320px]:space-x-0 max-[320px]:justify-items-center max-[320px]:space-y-3">
+        <div className="flex items-center space-x-6 pt-5 max-[640px]:justify-center max-[489px]:grid max-[489px]:grid-cols-2 max-[489px]:space-x-0 max-[489px]:justify-items-center max-[489px]:space-y-3">
           <Link href="/">
             <p className={`text-base font-bold md:text-lg text-darkBlue ease-in-out duration-300 hover:text-[#105A8B]`}>Inicio</p>
           </Link>
-          <Link href="/productos">
+          <Link className="min-[489px]:pl-4" style={{
+            marginTop: "0px",
+          }} href="/productos">
             <p className={`text-base font-bold md:text-lg text-darkBlue ease-in-out duration-300 hover:text-[#105A8B]`}>Productos</p>
           </Link>
           <Dropdown>
@@ -84,7 +86,7 @@ export default function Navbarvyv({navbarCategories}: NavbarvyvInterface) {
               ))}
             </DropdownMenu>
            </Dropdown>
-          <Link href="/acerca-del-negocio">
+          <Link href="/acerca-del-negocio" className="min-[489px]:pl-1">
             <p className={`text-base font-bold md:text-lg text-darkBlue ease-in-out duration-300 hover:text-[#105A8B]`}>Sobre Nosotros</p>
           </Link>
         </div>
