@@ -37,11 +37,11 @@ export default function AboutUs({navbarCategories}: AboutUsInterface) {
           Acerca de VyV Technologies
         </h1>
         <Image
-          className="w-full "
-          src="/about-us.png"
+          className="w-full aspect-[31/11] h-auto"
+          src="/about-us-remastered.png"
           alt="Imagen de Acerca de VyV Technologies"
           width={1440}
-          height={371}
+          height={363}
         />
         <p className="text-darkBlue font-medium lg:text-2xl text-lg lg:max-w-[810px] max-w-[950px] max-[1024px]:mx-8 flex justify-center mx-auto text-center lg:my-20 my-10">
           ¡Bienvenido a VyV Technologies, tu destino premium para accesorios y
