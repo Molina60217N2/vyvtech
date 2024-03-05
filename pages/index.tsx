@@ -59,7 +59,7 @@ export default function IndexPage({
         <h2 className="text-4xl text-darkBlue border-[#0F5C9A] border-b-4 font-bold mb-14 xl:ml-[315px] pt-14 max-[767px]:text-center md:w-[445px] max-[1024px]:max-w-[300px] max-[767px]:mx-auto max-[1024px]:text-2xl max-[636px]:max-w-[150px] max-[636px]:pt-12 max-[636px]:mb-9 md:ml-[255px] min-[769px]:ml-[155px]">
           PRODUCTOS MÁS NUEVOS
         </h2>
-        <div className="grid min-[1279px]:grid-cols-4 grid-cols-2 justify-items-center max-[1365px]:mx-3 max-[1279px]:mx-20 gap-y-5 max-[800px]:mx-0 min-[1025px]:gap-5 max-[1024px]:gap-10 max-[600px]:gap-0 max-[600px]:gap-y-3">
+        <div className="grid min-[1279px]:grid-cols-4 grid-cols-2 justify-items-center max-[1365px]:mx-3 max-[1279px]:mx-20 gap-y-5 max-[800px]:mx-18 max-[767px]:mx-0 min-[1025px]:gap-5 max-[1024px]:gap-10 max-[600px]:gap-0 max-[600px]:gap-y-3">
           {nodes.map((node) => (
             <NodeProductTeaser node={node} key={node.id} />
           ))}
