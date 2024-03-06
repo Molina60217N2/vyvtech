@@ -9,7 +9,7 @@ export default function Map() {
 
   return (
     <MapContainer
-      className="max-w-[1400px] min-[700px]:h-[700px] h-[500px] border rounded-xl mb-32 mx-auto max-[1400px]:mx-5"
+      className="max-w-[900px] min-[700px]:h-[500px] drop-shadow-2xl h-[500px] border rounded-xl mb-32 min-[900px]:mx-auto mx-10 min-[1199px]:mt-24 mt-20"
       center={position}
       zoom={16}
       scrollWheelZoom={true}
@@ -19,7 +19,7 @@ export default function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={position} animate={true} draggable={false} alt="VyV Technologies">
-        <Popup className="font-bold text-base">¡Puedes encontrarnos aquí!</Popup>
+        <Popup className="font-bold text-base">¡VyV Technologies!</Popup>
       </Marker>
     </MapContainer>
   );
