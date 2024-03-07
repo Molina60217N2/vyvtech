@@ -37,8 +37,8 @@ export default function AboutUs({navbarCategories}: AboutUsInterface) {
           Acerca de VyV Technologies
         </h1>
         <Image
-          className="w-[800px] aspect-auto rounded-md mx-auto drop-shadow-2xl"
-          src="/about-us-remastered.png"
+          className="w-[800px] aspect-[16/9] rounded-md h-auto mx-auto drop-shadow-2xl"
+          src="/about-us-remastered.webp"
           alt="Imagen de Acerca de VyV Technologies"
           width={1440}
           height={363}
