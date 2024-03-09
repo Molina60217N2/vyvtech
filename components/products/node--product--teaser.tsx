@@ -40,9 +40,9 @@ export function NodeProductTeaser({ node, ...props }: NodeProductTeaserProps) {
           <p className="text-sm md:text-base font-normal text-lightGray">
             {node.field_product_brand.name}
           </p>
-          <p className="text-sm text-darkBlue font-bold md:text-lg">
+          {/* <p className="text-sm text-darkBlue font-bold md:text-lg">
             ¢{node.field_product_price}
-          </p>
+          </p> */}
           <Link href={node.path.alias} className="flex justify-center">
             <Button className="bg-darkBlue rounded-3xl">
               <span className="text-sm md:text-base text-white">

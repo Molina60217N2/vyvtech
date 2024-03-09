@@ -80,12 +80,12 @@ export function NodeProduct({
               </p>
             </Link>
           </h3>
-          <h3 className="flex font-bold text-[40px] max-[768px]:text-[32px]">
+          {/* <h3 className="flex font-bold text-[40px] max-[768px]:text-[32px]">
             Precio:{" "}
             <p className="pl-2 text-[40px] text-[#0F5C9A] max-[768px]:text-[32px]">
               ₡{node.field_product_price}
             </p>
-          </h3>
+          </h3> */}
           <div className="pt-5 max-[1024px]:flex max-[1024px]:justify-center ">
             <Button
               onClick={openWhatsApp}
